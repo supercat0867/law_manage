@@ -23,6 +23,12 @@
 
                         </a>
                     </li >
+                    <li>
+                        <a _href="{{url('/admin/unit')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>客户名录</cite>
+                        </a>
+                    </li >
 {{--                    <li>--}}
 {{--                        <a _href="{{url('admin/user/create')}}">--}}
 {{--                            <i class="iconfont">&#xe6a7;</i>--}}
@@ -116,9 +122,15 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="admin-list.html">
+                        <a _href="{{asset('/admin/lawyer')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>律师列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="admin-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>律师信息管理</cite>
                         </a>
                     </li >
 

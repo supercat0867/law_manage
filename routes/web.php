@@ -5,6 +5,8 @@
 Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
     //查询下载中心路由
     Route::get('guide','VisitorController@guide');
+    //团队管理路由
+    Route::get('about','VisitorController@info');
 });
 
 //后台登录处理路由组
@@ -33,4 +35,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'AdminIsLogin
     Route::post('user/stop','UserController@customerStop');
     //用户启用
     Route::post('user/run','UserController@customerRun');
+    //客户名录列表
+    Route::get('/unit','UserController@unit');
+
+    //律师管理模块
+    Route::resource('lawyer','LawyerController');
 });

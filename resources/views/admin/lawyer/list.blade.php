@@ -20,33 +20,28 @@
   <body class="layui-anim layui-anim-up">
     <div class="x-nav">
       <span class="layui-breadcrumb">
-{{--        <a href="">首页</a>--}}
-{{--        <a href="">演示</a>--}}
-{{--        <a>--}}
-{{--          <cite>导航元素</cite></a>--}}
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/user">
+        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/lawyer">
           <div class="layui-input-inline">
             <select name="paging" lay-filter="aihao">
 {{--              <option value=""></option>--}}
               <option value="5" @if($request->input('paging')==5)  selected @endif>5</option>
               <option value="10" @if($request->input('paging')==10)  selected @endif>10</option>
             </select>
+
           </div>
-{{--          <input class="layui-input" placeholder="开始日" name="start" id="start">--}}
-{{--          <input class="layui-input" placeholder="截止日" name="end" id="end">--}}
-          <input type="text" name="customername" value="{{$request->input('customername')}}" placeholder="请输入客户名" autocomplete="off" class="layui-input" >
+          <input type="text" name="lawyername" value="{{$request->input('lawyername')}}" placeholder="请输入律师名" autocomplete="off" class="layui-input" >
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加客户','{{url("admin/user/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加律师','{{url("admin/lawyer/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：{{$count}} 条</span>
       </xblock>
       <table class="layui-table">
@@ -56,24 +51,24 @@
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
-            <th>客户名</th>
+            <th>姓名</th>
             <th>手机号</th>
-            <th>负责人</th>
+            <th>职务</th>
             <th>注册日期</th>
             <th>更新日期</th>
             <th>状态</th>
             <th>操作</th></tr>
         </thead>
         <tbody>
-        @foreach($customer as $v)
+        @foreach($lawyer as $v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id={{$v->customer_id}}><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id={{$v->lawyer_id}}><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>{{$v->customer_id}}</td>
-            <td>{{$v->customer_name}}</td>
-            <td>{{$v->customer_phone}}</td>
-            <td>{{$v->lawyer}}</td>
+            <td>{{$v->lawyer_id}}</td>
+            <td>{{$v->lawyer_name}}</td>
+            <td>{{$v->lawyer_phone}}</td>
+            <td>{{$v->duty}}</td>
             <td>{{$v->created_at}}</td>
             <td>{{$v->updated_at}}</td>
             @php
@@ -93,13 +88,13 @@
             <td class="td-status">
               <span class="{{$class}}">{{$status}}</span></td>
             <td class="td-manage">
-              <a onclick="member_stop(this,{{$v->customer_id}})" href="javascript:;"  title="{{$operate}}">
+              <a onclick="member_stop(this,{{$v->lawyer_id}})" href="javascript:;"  title="{{$operate}}">
                 <i class="layui-icon">{{$icon}}</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/user/'.$v->customer_id.'/edit')}}',600,400)" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/lawyer/'.$v->lawyer_id.'/edit')}}',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
-              <a title="删除" onclick="member_del(this,{{$v->customer_id}})" href="javascript:;">
+              <a title="删除" onclick="member_del(this,{{$v->lawyer_id}})" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -108,7 +103,7 @@
         </tbody>
       </table>
       <div class="page">
-        {!! $customer->appends($request->all())->render() !!}
+        {!! $lawyer->appends($request->all())->render() !!}
       </div>
 
     </div>

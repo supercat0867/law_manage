@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Model\Customer;
+use App\Model\Unit;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,8 @@ class UserController extends Controller
                 }
             })
             ->paginate($request->input('paging')?$request->input('num'):5);//默认5页
-        return view('admin.user.list',compact('customer','request'));
+        $count=$customer->count();
+        return view('admin.user.list',compact('customer','request','count'));
     }
 
     //返回添加客户页面
@@ -131,7 +133,7 @@ class UserController extends Controller
     public function customerStop(Request $request){
         $id=$request->input('id');
         $customer=Customer::where('customer_id',$id);
-        $res=$customer->update(['status'=>2]);
+        $res=$customer->update(['status'=>0]);
         if($res){
             $data=[
                 'status'=>0,
@@ -165,5 +167,16 @@ class UserController extends Controller
         }
         return $data;
     }
-
+    public function unit(Request $request){
+        $unit=Unit::orderBy('id','asc')
+            ->where(function ($query) use ($request){
+                $unitname=$request->input('unitname');
+                if(!empty($customername)){
+                    $query->where('name','like','%'.$unitname.'%');
+                }
+            })
+            ->paginate($request->input('paging')?$request->input('num'):5);//默认5页
+        $count=$unit->count();
+        return view('admin.unit.list',compact('unit','request','count'));
+    }
 }

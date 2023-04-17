@@ -12,4 +12,9 @@ class VisitorController extends Controller
     {
         return view("guide.index");
     }
+    //返回团队介绍界面
+    public function info()
+    {
+        return view("visitor.Info");
+    }
 }
