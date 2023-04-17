@@ -45,7 +45,7 @@
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加客户','{{url("admin/user/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
@@ -76,10 +76,20 @@
             <td>{{$v->lawyer}}</td>
             <td>{{$v->created_at}}</td>
             <td>{{$v->updated_at}}</td>
+            @php
+              if($v->status==1){
+                  $status="已启用";
+                  $operate='停用';
+              }
+              else{
+                  $status="已停用";
+                  $operate='启用';
+              }
+            @endphp
             <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+              <span class="layui-btn layui-btn-normal layui-btn-mini">{{$status}}</span></td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+              <a onclick="member_stop(this,{{$v->customer_id}})" href="javascript:;"  title="{{$operate}}">
                 <i class="layui-icon">&#xe601;</i>
               </a>
               <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/user/'.$v->customer_id.'/edit')}}',600,400)" href="javascript:;">
@@ -115,23 +125,53 @@
 
        /*用户-停用*/
       function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
+          var operate=$(obj).attr('title');
+          layer.confirm('确认要'+operate+'吗？',function(index){
 
-              if($(obj).attr('title')=='启用'){
+              if(operate=='停用'){
 
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
+                $.ajax({
+                  type:'POST',
+                  url:'/admin/user/stop',
+                  dataType:'json',
+                  data:{
+                    _token: "{{csrf_token()}}",
+                    id:id,
+                  },
+                  success:function (data){
+                    if(data.status==0){
+                      $(obj).attr('title','启用')
+                      $(obj).find('i').html('&#xe62f;');
+                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                      layer.msg(data.message,{icon: 5,time:1000});
+                    }
+                    else {
+                      layer.msg(data.message,{icon:5,time:1000});
+                    }
+                  }
+                })
 
               }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
+                $.ajax({
+                  type:'POST',
+                  url:'/admin/user/run',
+                  dataType:'json',
+                  data:{
+                    _token: "{{csrf_token()}}",
+                    id:id,
+                  },
+                  success:function (data){
+                    if(data.status==0){
+                      $(obj).attr('title','停用')
+                      $(obj).find('i').html('&#xe601;');
+                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                      layer.msg(data.message,{icon: 6,time:1000});
+                    }
+                    else {
+                      layer.msg(data.message,{icon:5,time:1000});
+                    }
+                  }
+                })
               }
               
           });
@@ -154,25 +194,33 @@
           });
       }
 
-
-
       function delAll (argument) {
         //获取到要批量删除的用户ID
-        var ids =[];
+        var arr =[];
         $(".layui-form-checked").not('.header').each(function (i,v){
           var u=$(v).attr('data-id');
-          ids.push(u);
+          arr.push(u);
         })
+        var ids=arr.join(',');
         layer.confirm('确认要删除吗？',function(index){
-            $.get('/admin/user/del',{'ids':ids},function (data){
-              if(data.status==0){
-                $(".layui-form-checked").not('.header').parents('tr').remove();
-                layer.msg(data.message,{icon:6,time:1000});
+            $.ajax({
+              type:'POST',
+              url:'/admin/user/del',
+              dataType:'json',
+              data:{
+                _token: "{{csrf_token()}}",
+                id:ids,
+              },
+              success:function (data){
+                if(data.status==0){
+                  $(".layui-form-checked").not('.header').parents('tr').remove();
+                  layer.msg(data.message,{icon:6,time:1000});
+                }
+                else {
+                  layer.msg(data.message,{icon:5,time:1000});
+                }
               }
-              else {
-                layer.msg(data.message,{icon:5,time:1000});
-              }
-            });
+            })
         });
       }
     </script>
