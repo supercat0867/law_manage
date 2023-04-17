@@ -101,7 +101,7 @@
                             <td>2.1</td></tr>
                         <tr>
                             <th>服务器地址</th>
-                            <td>supercat.cc</td></tr>
+                            <td>localhost</td></tr>
                         <tr>
                             <th>操作系统</th>
                             <td>WINNT</td></tr>
@@ -140,12 +140,12 @@
                     <tbody>
                         <tr>
                             <th>版权所有</th>
-                            <td>律冠精英律师团
+                            <td>XXXXX有限公司
                                 <a href="" class='x-a' target="_blank"></a></td>
                         </tr>
                         <tr>
                             <th>开发者</th>
-                            <td>唐博浩(howietung@163.com)</td></tr>
+                            <td>supercat(howietung@163.com)</td></tr>
                     </tbody>
                 </table>
             </div>

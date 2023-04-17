@@ -16,7 +16,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
     //后台登录处理路由
     Route::post('dologin','LoginController@doLogin');
     //加密算法
-//    Route::get('jiami','LoginController@jiami');
+    Route::get('jiami','LoginController@jiami');
 });
 
 //后台操作路由组
@@ -36,8 +36,20 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'AdminIsLogin
     //用户启用
     Route::post('user/run','UserController@customerRun');
     //客户名录列表
-    Route::get('/unit','UserController@unit');
+    Route::get('unit','UserController@unit');
 
     //律师管理模块
     Route::resource('lawyer','LawyerController');
+    //律师批量删除
+    Route::post('lawyer/del','LawyerController@delAll');
+    //律师账户停用
+    Route::post('lawyer/stop','LawyerController@lawyerStop');
+    //律师账户启用
+    Route::post('lawyer/run','LawyerController@lawyerRun');
+    //律师展示信息列表页
+    Route::get('lawyer/show','LawyerController@show');
+    //隐藏律师展示页
+    Route::post('lawyer/hidden','LawyerController@hiddenLawyer');
+    //启用律师展示页
+    Route::post('lawyer/showon','LawyerController@showLawyer');
 });

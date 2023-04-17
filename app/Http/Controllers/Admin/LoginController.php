@@ -60,12 +60,12 @@ class LoginController extends Controller
 
     }
         //哈希加密测试
-//    public function jiami()
-//        {
-//        $str='123456';
-//        $crypt_str=Crypt::encrypt($str);
-//        return $crypt_str;
-//        }
+    public function jiami()
+        {
+        $str='123456';
+        $crypt_str=Crypt::encrypt($str);
+        return $crypt_str;
+        }
     //返回后台首页
     public function index(){
         $adminInfo=session()->get('adminInfo');

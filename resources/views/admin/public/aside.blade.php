@@ -128,9 +128,9 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="admin-list.html">
+                        <a _href="{{asset('/admin/lawyer/show')}}">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>律师信息管理</cite>
+                            <cite>展示页管理</cite>
                         </a>
                     </li >
 
