@@ -19,6 +19,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
     Route::get('jiami','LoginController@jiami');
 });
 
+//提示无权限
+Route::get('noaccess','Admin\LoginController@noaccess');
+
 //后台操作路由组
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'AdminIsLogin'],function (){
     //后台首页路由
@@ -27,6 +30,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'AdminIsLogin
     Route::get('welcome','LoginController@welcome');
     //后台退出登录路由
     Route::get('logout','LoginController@logout');
+});
+
+//后台操作路由组
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','AdminIsLogin']],function (){
     //后台用户模块相关路由
     Route::resource('user','UserController');
     //用户批量删除
@@ -55,10 +62,15 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'AdminIsLogin
     //律师展示页修改表单
     Route::get('lawyer/{lawyer}/editshow','LawyerController@editShow');
 
-
-
-    //角色授权路由
-    Route::get('role/auth/{id}','RoleController@auth');
     //角色模块
     Route::resource('role','RoleController');
+    //角色授权路由
+    Route::get('role/auth/{id}','RoleController@auth');
+    //处理授权
+    Route::post('role/doauth','RoleController@doauth');
+    //橘色批量删除
+    Route::post('role/del','RoleController@delAll');
+
+    //管理员模块
+    Route::resource('admin','AdminController');
 });

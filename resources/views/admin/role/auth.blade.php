@@ -25,7 +25,8 @@
                     <span class="x-red">*</span>角色名称
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="role" required="" lay-verify="nikename"
+                    <input type="hidden" name="role_id" value="{{$role->id}}">
+                    <input type="text" id="L_username" value="{{$role->role_name}}" name="role" required="" lay-verify="nikename"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -34,17 +35,20 @@
                     <span class="x-red">*</span>权限列表
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="describe" required="" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入角色描述
+                    @foreach($perms as $v)
+                        @if(in_array($v->id,$own_pers))
+                            <input type="checkbox" name="permission_id[]" title="{{$v->per_name}}" value="{{$v->id}}" checked>
+                        @else
+                            <input type="checkbox" name="permission_id[]" title="{{$v->per_name}}" value="{{$v->id}}">
+                        @endif
+                    @endforeach
                 </div>
             </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  增加
+                  授权
               </button>
           </div>
       </form>
@@ -59,7 +63,7 @@
           form.verify({
             nikename: function(value){
               if(value.length < 2){
-                return '姓名至少2个字!';
+                return '角色名至少2个字!';
               }
             }
           });
@@ -69,7 +73,7 @@
             //发异步，把数据提交给php
               $.ajax({
                   type:'POST',
-                  url:'/admin/role',
+                  url:'/admin/role/doauth',
                   dataType:'json',
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -59,13 +59,19 @@ class LoginController extends Controller
         return redirect('admin/index');
 
     }
-        //哈希加密测试
+
+    //哈希加密测试
     public function jiami()
         {
         $str='123456';
         $crypt_str=Crypt::encrypt($str);
         return $crypt_str;
         }
+
+    //无权限页面
+    public function noaccess(){
+        return view("errors.noaccess");
+    }
     //返回后台首页
     public function index(){
         $adminInfo=session()->get('adminInfo');

@@ -14,4 +14,10 @@ class Admin extends Model
     public $guarded=[];
     // 4、是否维护create_at和update_at字段
     public $timestamps=false;
+
+    //添加动态属性，关联权限模型
+    public function role()
+    {
+        return $this->belongsToMany('App\Model\Role','admin_role','admin_id','role_id');
+    }
 }

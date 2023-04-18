@@ -22,21 +22,24 @@
 <div class="x-body layui-anim layui-anim-up">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label for="name" class="layui-form-label">
-                <span class="x-red">*</span>角色名
+            <label for="L_username" class="layui-form-label">
+                <span class="x-red">*</span>用户名
             </label>
             <div class="layui-input-inline">
-                <input type="hidden" name="uid" value="{{$role->id}}">
-                <input type="text" id="name" name="rolename" required=""  value="{{$role->role_name}}" lay-verify="required"
+                <input type="hidden" name="uid" value="{{$customer->customer_id}}">
+                <input type="text" id="L_username" name="username" value="{{$customer->customer_name}}" required="" lay-verify="nikename"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item layui-form-text">
-            <label for="desc" class="layui-form-label">
-                描述
+        <div class="layui-form-item">
+            <label for="L_phone" class="layui-form-label">
+                <span class="x-red">*</span>手机号
             </label>
-            <div class="layui-input-block">
-                <textarea  id="desc" name="describe" class="layui-textarea">{{$role->describe}}</textarea>
+            <div class="layui-input-inline">
+                <input type="text" id="L_phone" name="phone" value="{{$customer->customer_phone}}" required="" lay-verify="phone" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>将会成为客户的登入手机号
             </div>
         </div>
         <div class="layui-form-item">
@@ -54,19 +57,30 @@
         var form = layui.form
             ,layer = layui.layer;
 
+        //自定义验证规则
+        form.verify({
+            nikename: function(value){
+                if(value.length < 2){
+                    return '姓名至少2个字!';
+                }
+            }
+        });
+
         //监听提交
         form.on('submit(edit)', function(data){
             var uid=$("input[name='uid']").val();
             //发异步，把数据提交给php
             $.ajax({
                 type:'PUT',
-                url:'/admin/role/'+uid,
+                url:'/admin/user/'+uid,
                 dataType:'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data:data.field,
                 success:function (data){
+                    // 弹层提示添加成功，并刷新父页面
+                    // console.log(data);
                     if(data.status==0){
                         layer.alert(data.message,{icon:6},function (){
                             parent.location.reload(true);
@@ -79,9 +93,12 @@
                 error:function (){
                     //错误信息
                 }
+
             })
+
             return false;
         });
+
 
     });
 </script>
