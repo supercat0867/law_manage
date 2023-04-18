@@ -22,40 +22,24 @@
         <form class="layui-form">
             <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">
-                    <span class="x-red">*</span>客户名
+                    <span class="x-red">*</span>角色名称
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                    <input type="text" id="L_username" name="role" required="" lay-verify="nikename"
                            autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入客户的真实姓名
                 </div>
             </div>
-          <div class="layui-form-item">
-              <label for="L_phone" class="layui-form-label">
-                  <span class="x-red">*</span>手机号
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为客户的登入手机号
-              </div>
-          </div>
-          <div class="layui-form-item">
+            <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">
-                    <span class="x-red">*</span>负责人
+                    <span class="x-red">*</span>角色描述
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="lawyer" required="" lay-verify="nikename"
-                           autocomplete="off" class="layui-input">
+                    <input type="text" id="L_username" name="describe" required="" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入律师姓名
+                    <span class="x-red">*</span>输入角色描述
                 </div>
-          </div>
+            </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -85,7 +69,7 @@
             //发异步，把数据提交给php
               $.ajax({
                   type:'POST',
-                  url:'/admin/user',
+                  url:'/admin/role',
                   dataType:'json',
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -30,13 +30,6 @@
                         </a>
                     </li >
 {{--                    <li>--}}
-{{--                        <a _href="{{url('admin/user/create')}}">--}}
-{{--                            <i class="iconfont">&#xe6a7;</i>--}}
-{{--                            <cite>添加用户</cite>--}}
-
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
 {{--                        <a href="javascript:;">--}}
 {{--                            <i class="iconfont">&#xe70b;</i>--}}
 {{--                            <cite>会员管理</cite>--}}
@@ -166,11 +159,29 @@
                         </a>
                     </li >
                     <li>
-                        <a _href="admin-role.html">
-                            <i class="iconfont">&#xe6a7;</i>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe70b;</i>
                             <cite>角色管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
                         </a>
-                    </li >
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="{{asset('/admin/role')}}">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>角色列表</cite>
+
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="{{asset('/admin/role/create')}}">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>角色添加</cite>
+
+                                </a>
+                            </li >
+
+                        </ul>
+                    </li>
                     <li>
                         <a _href="admin-cate.html">
                             <i class="iconfont">&#xe6a7;</i>

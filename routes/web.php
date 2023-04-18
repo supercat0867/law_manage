@@ -52,4 +52,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'AdminIsLogin
     Route::post('lawyer/hidden','LawyerController@hiddenLawyer');
     //启用律师展示页
     Route::post('lawyer/showon','LawyerController@showLawyer');
+    //律师展示页修改表单
+    Route::get('lawyer/{lawyer}/editshow','LawyerController@editShow');
+
+
+
+    //角色授权路由
+    Route::get('role/auth/{id}','RoleController@auth');
+    //角色模块
+    Route::resource('role','RoleController');
 });

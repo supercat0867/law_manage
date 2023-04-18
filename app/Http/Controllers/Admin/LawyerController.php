@@ -219,4 +219,10 @@ class LawyerController extends Controller
         }
         return $data;
     }
+    //返回律师展示页编辑表单
+    public function editShow($id)
+    {
+        $lawyer=Lawyer::find($id);
+        return view('admin.lawyer.editShow',compact('lawyer'));
+    }
 }
