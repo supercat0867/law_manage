@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>用户列表页</title>
+    <title></title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="csrf-token" content="{{csrf_token()}}">
@@ -23,23 +23,43 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
-                <span class="x-red">*</span>用户名
+                <span class="x-red">*</span>登录名
             </label>
             <div class="layui-input-inline">
-                <input type="hidden" name="uid" value="{{$customer->customer_id}}">
-                <input type="text" id="L_username" name="username" value="{{$customer->customer_name}}" required="" lay-verify="nikename"
+                <input type="hidden" name="uid" value="{{$admin->admin_id}}">
+                <input type="text" id="L_username" name="username" required="" lay-verify="nikename" value="{{$admin->admin_name}}"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="L_phone" class="layui-form-label">
-                <span class="x-red">*</span>手机号
+            <label class="layui-form-label">
+                <span class="x-red">*</span>角色
             </label>
-            <div class="layui-input-inline">
-                <input type="text" id="L_phone" name="phone" value="{{$customer->customer_phone}}" required="" lay-verify="phone" autocomplete="off" class="layui-input">
+            <div class="layui-input-block">
+                <select name="role" lay-filter="aihao">
+                    @foreach($role as $v)
+                        @if(in_array($v->id,$own_role))
+                            <option value="{{$v->id}}" selected>{{$v->role_name}}</option>
+                        @else
+                            <option value="{{$v->id}}">{{$v->role_name}}</option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为客户的登入手机号
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" lay-verify="pass" id="pass" autocomplete="off" class="layui-input" value="{{$pass}}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                <span class="x-red">*</span>确认密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" lay-verify="repass" id="repass" autocomplete="off" class="layui-input" value="{{$pass}}">
             </div>
         </div>
         <div class="layui-form-item">
@@ -61,7 +81,17 @@
         form.verify({
             nikename: function(value){
                 if(value.length < 2){
-                    return '姓名至少2个字!';
+                    return '登录名至少2个字!';
+                }
+            },
+            pass:function (value){
+                if(value.length<6||value.length>12){
+                    return '密码长度必须为6~12位';
+                }
+            },
+            repass: function(value){
+                if($('#pass').val()!=$('#repass').val()){
+                    return '两次密码不一致';
                 }
             }
         });
@@ -72,15 +102,13 @@
             //发异步，把数据提交给php
             $.ajax({
                 type:'PUT',
-                url:'/admin/user/'+uid,
+                url:'/admin/admin/'+uid,
                 dataType:'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data:data.field,
                 success:function (data){
-                    // 弹层提示添加成功，并刷新父页面
-                    // console.log(data);
                     if(data.status==0){
                         layer.alert(data.message,{icon:6},function (){
                             parent.location.reload(true);

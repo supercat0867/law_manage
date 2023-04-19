@@ -22,40 +22,40 @@
         <form class="layui-form">
             <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">
-                    <span class="x-red">*</span>客户名
+                    <span class="x-red">*</span>登录名
                 </label>
                 <div class="layui-input-inline">
                     <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
                            autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入客户的真实姓名
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>角色
+                </label>
+                <div class="layui-input-block">
+                    <select name="role" lay-filter="aihao">
+                        @foreach($role as $v)
+                            <option value="{{$v->id}}">{{$v->role_name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-          <div class="layui-form-item">
-              <label for="L_phone" class="layui-form-label">
-                  <span class="x-red">*</span>手机号
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为客户的登入手机号
-              </div>
-          </div>
-          <div class="layui-form-item">
-                <label for="L_username" class="layui-form-label">
-                    <span class="x-red">*</span>负责人
-                </label>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>密码</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="lawyer" required="" lay-verify="nikename"
-                           autocomplete="off" class="layui-input">
+                    <input type="password" name="password" lay-verify="pass" id="pass" autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入律师姓名
+                <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">
+                    <span class="x-red">*</span>确认密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="password" lay-verify="repass" id="repass" autocomplete="off" class="layui-input">
                 </div>
-          </div>
+            </div>
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
@@ -75,8 +75,18 @@
           form.verify({
             nikename: function(value){
               if(value.length < 2){
-                return '姓名至少2个字!';
+                return '登录名至少2个字!';
               }
+            },
+            pass:function (value){
+                if(value.length<6||value.length>12){
+                    return '密码长度必须为6~12位';
+                }
+            },
+            repass: function(value){
+                if($('#pass').val()!=$('#repass').val()){
+                    return '两次密码不一致';
+                }
             }
           });
 
@@ -85,7 +95,7 @@
             //发异步，把数据提交给php
               $.ajax({
                   type:'POST',
-                  url:'/admin/user',
+                  url:'/admin/admin',
                   dataType:'json',
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -97,9 +107,6 @@
                           layer.alert(data.message,{icon:6},function (){
                               parent.location.reload(true);
                           })
-                      }
-                      else {
-                          layer.alert(data.message,{icon:5})
                       }
                   },
                   error:function (){

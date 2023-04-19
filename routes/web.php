@@ -73,4 +73,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
 
     //管理员模块
     Route::resource('admin','AdminController');
+    //管理员停用
+    Route::post('admin/stop','AdminController@adminStop');
+    //管理员启用
+    Route::post('admin/run','AdminController@adminRun');
+    //管理员批量删除
+    Route::post('admin/del','AdminController@delAll');
+
 });

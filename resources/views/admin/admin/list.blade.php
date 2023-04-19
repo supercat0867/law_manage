@@ -118,7 +118,7 @@
 
                 $.ajax({
                   type:'POST',
-                  url:'/admin/user/stop',
+                  url:'/admin/admin/stop',
                   dataType:'json',
                   data:{
                     _token: "{{csrf_token()}}",
@@ -140,7 +140,7 @@
               }else{
                 $.ajax({
                   type:'POST',
-                  url:'/admin/user/run',
+                  url:'/admin/admin/run',
                   dataType:'json',
                   data:{
                     _token: "{{csrf_token()}}",
@@ -166,7 +166,7 @@
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
-            $.post('/admin/user/'+id,{"_method":"delete","_token":"{{csrf_token()}}"},function (data){
+            $.post('/admin/admin/'+id,{"_method":"delete","_token":"{{csrf_token()}}"},function (data){
               // console.log(data);
               if(data.status==0){
                 $(obj).parents("tr").remove();
@@ -191,7 +191,7 @@
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
               type:'POST',
-              url:'/admin/user/del',
+              url:'/admin/admin/del',
               dataType:'json',
               data:{
                 _token: "{{csrf_token()}}",
