@@ -30,17 +30,14 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/user">
+        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/admins">
           <div class="layui-input-inline">
             <select name="paging" lay-filter="aihao">
-{{--              <option value=""></option>--}}
               <option value="5" @if($request->input('paging')==5)  selected @endif>5</option>
               <option value="10" @if($request->input('paging')==10)  selected @endif>10</option>
             </select>
           </div>
-{{--          <input class="layui-input" placeholder="开始日" name="start" id="start">--}}
-{{--          <input class="layui-input" placeholder="截止日" name="end" id="end">--}}
-          <input type="text" name="customername" value="{{$request->input('customername')}}" placeholder="请输入客户名" autocomplete="off" class="layui-input" >
+          <input type="text" name="name" value="{{$request->input('name')}}" placeholder="请输入行政人员名" autocomplete="off" class="layui-input" >
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
@@ -56,36 +53,38 @@
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
-            <th>客户名</th>
+            <th>形象照</th>
+            <th>姓名</th>
             <th>手机号</th>
-            <th>负责人</th>
-            <th>注册日期</th>
-            <th>更新日期</th>
+            <th>学历</th>
+            <th>职务</th>
+            <th>个人介绍</th>
             <th>状态</th>
             <th>操作</th></tr>
         </thead>
         <tbody>
-        @foreach($customer as $v)
+        @foreach($admins as $v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id={{$v->customer_id}}><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id={{$v->id}}><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>{{$v->customer_id}}</td>
-            <td>{{$v->customer_name}}</td>
-            <td>{{$v->customer_phone}}</td>
-            <td>{{$v->lawyer}}</td>
-            <td>{{$v->created_at}}</td>
-            <td>{{$v->updated_at}}</td>
+            <td>{{$v->id}}</td>
+            <td><img src="{{asset($v->head)}}" alt=""></td>
+            <td>{{$v->name}}</td>
+            <td>{{$v->phone}}</td>
+            <td>{{$v->education}}</td>
+            <td>{{$v->duty}}</td>
+            <td>{{$v->intro}}</td>
             @php
-              if($v->status==1){
-                  $status="已启用";
-                  $operate='停用';
+              if($v->show_status==1){
+                  $status="已展示";
+                  $operate='隐藏';
                   $class='layui-btn layui-btn-normal layui-btn-mini ';
                   $icon="&#xe601;";
               }
               else{
-                  $status="已停用";
-                  $operate='启用';
+                  $status="已隐藏";
+                  $operate='展示';
                   $class='layui-btn layui-btn-normal layui-btn-mini layui-btn-disabled';
                   $icon="&#xe62f;";
               }
@@ -93,13 +92,13 @@
             <td class="td-status">
               <span class="{{$class}}">{{$status}}</span></td>
             <td class="td-manage">
-              <a onclick="member_stop(this,{{$v->customer_id}})" href="javascript:;"  title="{{$operate}}">
+              <a onclick="member_stop(this,{{$v->id}})" href="javascript:;"  title="{{$operate}}">
                 <i class="layui-icon">{{$icon}}</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/user/'.$v->customer_id.'/edit')}}',600,400)" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/user/'.$v->id.'/edit')}}',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
-              <a title="删除" onclick="member_del(this,{{$v->customer_id}})" href="javascript:;">
+              <a title="删除" onclick="member_del(this,{{$v->id}})" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -108,7 +107,7 @@
         </tbody>
       </table>
       <div class="page">
-        {!! $customer->appends($request->all())->render() !!}
+        {!! $admins->appends($request->all())->render() !!}
       </div>
 
     </div>

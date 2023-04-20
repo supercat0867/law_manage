@@ -78,17 +78,17 @@
 				<p class="name">团队介绍</p>
 				<ul class="list">
 					<li>
-						<a class="dianji" href="Intro.html"></a>
+						<a class="dianji" href="/"></a>
 						<img src="{{asset('visitor/images/icon1.png')}}" alt="">
 						<span>团队简介</span>
 					</li>
 					<li>
-						<a class="dianji" href="admin"></a>
+						<a class="dianji" href="/"></a>
 						<img src="{{asset('visitor/images/icon2.png')}}" alt="">
 						<span>行政管理</span>
 					</li>
 					<li>
-						<a class="dianji" href="customer"></a>
+						<a class="dianji" href="/lvguan/customer"></a>
 						<img src="{{asset('visitor/images/icon3.png')}}" alt="">
 						<span>服务单位</span>
 					</li>

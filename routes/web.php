@@ -1,5 +1,7 @@
 <?php
 
+//律冠团队首页
+Route::get('/','Visitor\VisitorController@index');
 
 //免登录访客页面路由组
 Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
@@ -7,6 +9,12 @@ Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
     Route::get('guide','VisitorController@guide');
     //团队管理路由
     Route::get('about','VisitorController@info');
+    //法律咨询选择路由
+    Route::get('advice','VisitorController@advice');
+    //律师展示页面路由
+    Route::get('lawyer','VisitorController@lawyer');
+    //客户名录展示
+    Route::get('customer','VisitorController@customer');
 });
 
 //后台登录处理路由组
@@ -44,6 +52,22 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
     Route::post('user/run','UserController@customerRun');
     //客户名录列表
     Route::get('unit','UserController@unit');
+    //客户名录添加页面
+    Route::get('unit/create','UserController@unitCreate');
+    //客户名录添加接口
+    Route::post('unit','UserController@unitstore');
+    //客户名录编辑页面
+    Route::get('unit/{id}/edit','UserController@unitedit');
+    //客户名录编辑接口
+    Route::put('unit/{id}','UserController@unitupdate');
+    //客户名录删除接口
+    Route::delete('unit/{id}','UserController@unitdestroy');
+    //客户名录批量删除接口
+    Route::post('unit/del','UserController@unitdelAll');
+    //客户名录隐藏接口
+    Route::post('unit/stop','UserController@unitstop');
+    //客户名录展示接口
+    Route::post('unit/run','UserController@unitrun');
 
     //律师管理模块
     Route::resource('lawyer','LawyerController');
@@ -79,5 +103,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
     Route::post('admin/run','AdminController@adminRun');
     //管理员批量删除
     Route::post('admin/del','AdminController@delAll');
+
+    //行政人员管理模块哦
+    Route::resource('admins','AdministController');
 
 });

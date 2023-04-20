@@ -56,6 +56,22 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
+                    <cite>行政管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{{asset('/admin/admins')}}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>行政列表</cite>
+                        </a>
+                    </li >
+
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
                     <cite>文章管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>
@@ -99,17 +115,14 @@
                                 <a _href="{{asset('/admin/role')}}">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>角色列表</cite>
-
                                 </a>
                             </li>
                             <li>
                                 <a _href="{{asset('/admin/role/create')}}">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>角色添加</cite>
-
                                 </a>
                             </li >
-
                         </ul>
                     </li>
                 </ul>

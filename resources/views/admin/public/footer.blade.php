@@ -1,6 +1,6 @@
 <!-- 底部开始 -->
 <div class="footer">
-    <div class="copyright">&copy;版权 XX律师事务所</div>
+    <div class="copyright">Copyright © 2023 四川律冠法律咨询有限公司 All rights reserved.</div>
 </div>
 <!-- 底部结束 -->
 <script>

@@ -1,1 +1,1 @@
-<p class="footer">&copy;版权 XXXX律师事务所</p>
+<p class="footer">Copyright © 2023 四川律冠法律咨询有限公司 All rights reserved.</p>

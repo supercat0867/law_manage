@@ -19,7 +19,7 @@ class LawyerController extends Controller
                     $query->where('lawyer_name','like','%'.$lawyername.'%');
                 }
             })
-            ->paginate($request->input('paging')?$request->input('num'):5);//默认5页
+            ->paginate($request->input('paging')?$request->input('paging'):5);//默认5页
         $count=$lawyer->count();
         return view('admin.lawyer.list',compact('lawyer','request','count'));
     }
@@ -174,7 +174,7 @@ class LawyerController extends Controller
                     $query->where('lawyer_name','like','%'.$lawyername.'%');
                 }
             })
-            ->paginate($request->input('paging')?$request->input('num'):5);//默认5页
+            ->paginate($request->input('paging')?$request->input('paging'):5);//默认5页
         $count=$lawyer->count();
         return view('admin.lawyer.show',compact('lawyer','request','count'));
     }

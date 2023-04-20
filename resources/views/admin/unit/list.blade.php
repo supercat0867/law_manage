@@ -30,7 +30,7 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/user">
+        <form class="layui-form layui-col-md12 x-so" method="get" action="/admin/unit">
           <div class="layui-input-inline">
             <select name="paging" lay-filter="aihao">
 {{--              <option value=""></option>--}}
@@ -46,7 +46,7 @@
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加客户','{{url("admin/user/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加客户','{{url("admin/unit/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：{{$count}} 条</span>
       </xblock>
       <table class="layui-table">
@@ -66,7 +66,7 @@
         @foreach($unit as $v)
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id={{$v->_id}}><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id={{$v->id}}><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>{{$v->id}}</td>
             <td>{{$v->name}}</td>
@@ -92,7 +92,7 @@
               <a onclick="member_stop(this,{{$v->id}})" href="javascript:;"  title="{{$operate}}">
                 <i class="layui-icon">{{$icon}}</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/user/'.$v->id.'/edit')}}',600,400)" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/unit/'.$v->id.'/edit')}}',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a title="删除" onclick="member_del(this,{{$v->id}})" href="javascript:;">
@@ -128,11 +128,11 @@
           var operate=$(obj).attr('title');
           layer.confirm('确认要'+operate+'吗？',function(index){
 
-              if(operate=='停用'){
+              if(operate=='隐藏'){
 
                 $.ajax({
                   type:'POST',
-                  url:'/admin/user/stop',
+                  url:'/admin/unit/stop',
                   dataType:'json',
                   data:{
                     _token: "{{csrf_token()}}",
@@ -140,9 +140,9 @@
                   },
                   success:function (data){
                     if(data.status==0){
-                      $(obj).attr('title','启用')
+                      $(obj).attr('title','展示')
                       $(obj).find('i').html('&#xe62f;');
-                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已隐藏');
                       layer.msg(data.message,{icon: 5,time:1000});
                     }
                     else {
@@ -154,7 +154,7 @@
               }else{
                 $.ajax({
                   type:'POST',
-                  url:'/admin/user/run',
+                  url:'/admin/unit/run',
                   dataType:'json',
                   data:{
                     _token: "{{csrf_token()}}",
@@ -162,9 +162,9 @@
                   },
                   success:function (data){
                     if(data.status==0){
-                      $(obj).attr('title','停用')
+                      $(obj).attr('title','隐藏')
                       $(obj).find('i').html('&#xe601;');
-                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已展示');
                       layer.msg(data.message,{icon: 6,time:1000});
                     }
                     else {
@@ -173,14 +173,13 @@
                   }
                 })
               }
-              
           });
       }
 
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
-            $.post('/admin/user/'+id,{"_method":"delete","_token":"{{csrf_token()}}"},function (data){
+            $.post('/admin/unit/'+id,{"_method":"delete","_token":"{{csrf_token()}}"},function (data){
               // console.log(data);
               if(data.status==0){
                 $(obj).parents("tr").remove();
@@ -205,7 +204,7 @@
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
               type:'POST',
-              url:'/admin/user/del',
+              url:'/admin/unit/del',
               dataType:'json',
               data:{
                 _token: "{{csrf_token()}}",

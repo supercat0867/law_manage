@@ -23,23 +23,15 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
-                <span class="x-red">*</span>用户名
+                <span class="x-red">*</span>客户
             </label>
             <div class="layui-input-inline">
-                <input type="hidden" name="uid" value="{{$customer->customer_id}}">
-                <input type="text" id="L_username" name="username" value="{{$customer->customer_name}}" required="" lay-verify="nikename"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label for="L_phone" class="layui-form-label">
-                <span class="x-red">*</span>手机号
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" id="L_phone" name="phone" value="{{$customer->customer_phone}}" required="" lay-verify="phone" autocomplete="off" class="layui-input">
+                <input type="hidden" name="uid" value="{{$unit->id}}">
+                <input type="text" id="L_username" name="name" required="" lay-verify="nikename"
+                       autocomplete="off" class="layui-input" value="{{$unit->name}}">
             </div>
             <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为客户的登入手机号
+                <span class="x-red">*</span>输入客户单位/公司/组织名
             </div>
         </div>
         <div class="layui-form-item">
@@ -61,7 +53,7 @@
         form.verify({
             nikename: function(value){
                 if(value.length < 2){
-                    return '姓名至少2个字!';
+                    return '客户名至少2个字!';
                 }
             }
         });
@@ -72,7 +64,7 @@
             //发异步，把数据提交给php
             $.ajax({
                 type:'PUT',
-                url:'/admin/user/'+uid,
+                url:'/admin/unit/'+uid,
                 dataType:'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

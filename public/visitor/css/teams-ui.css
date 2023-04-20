@@ -1,0 +1,248 @@
+body {
+  color: #1d1d1d;
+  background-color: #f5f5f5;
+}
+
+#global .nav-link {
+  color: #1d1d1d;
+  padding: 0 16px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+#global .nav-link.active {
+  color: #ed1849;
+}
+
+/* HEADER */
+#global {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+  z-index: 5;
+  transition: all 0.3s ease-in-out;
+}
+#global + div {
+  padding-top: 60px;
+}
+#global.active {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.section {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .section {
+    height: 100vh;
+  }
+}
+
+/* end HEADER */
+/* BANNER */
+.home-banner {
+  position: relative;
+  padding-top: 96px;
+}
+.home-banner .banner-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.home-banner .banner-content .wgroup {
+  width: 60%;
+}
+.home-banner .tech-stack {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.home-banner .tech-stack li .stack {
+  font-size: 32px;
+  padding: 12px;
+}
+
+/* FOOTER */
+footer {
+  background-color: #666f80;
+  color: #fff;
+  padding: 8px 0;
+}
+
+.team-ui--item {
+  position: relative;
+}
+.team-ui--item figure {
+  margin: 0;
+}
+
+/* Typography */
+.team-title, .team-subheading {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.team-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.team-subheading {
+  font-size: 0.75rem;
+  /*color: #a8a8a8;*/
+  color: #0a53be;
+}
+
+.team-body {
+  font-size: 0.875rem;
+}
+
+/* Background */
+.bg-white {
+  background-color: #fff;
+}
+
+.bg-shade-f9 {
+  background-color: #f9f9f9;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .mobile-gap {
+    row-gap: 26px;
+  }
+}
+/* Overlays */
+.overlay-bg {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  display: block;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  background-color: #000;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.overlay-bg-gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(255, 255, 255, 0) 31%);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* MEDIA */
+img {
+  max-width: 100%;
+  height: 100%;
+}
+
+/* Social Media */
+.ui-team--social {
+  margin-top: 6px;
+}
+.ui-team--social .social-item--icon {
+  display: inline-block;
+  text-align: center;
+}
+.ui-team--social .social-item--icon a {
+  color: #2b2b2b;
+  padding: 8px;
+}
+
+/* Sections */
+.hgroup-spacer--btm {
+  margin-bottom: 48px;
+}
+
+.hgroup-spacer--top {
+  margin-top: 48px;
+}
+
+/* ===============================
+STYLE 1
+=============================== */
+.style-1 {
+  border-radius: 10px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.style-1 figure {
+  margin: 0;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 250px;
+}
+@media (max-width: 1023px) {
+  .style-1 figure {
+    flex-direction: column;
+  }
+}
+@media (max-width: 1023px) {
+  .style-1 figure {
+    height: auto;
+  }
+}
+.style-1 .team-col--sm {
+  flex: 0 0 auto;
+  width: 41.6667%;
+}
+.style-1 .team-col--lg {
+  flex: 0 0 auto;
+  width: 58.3333%;
+}
+@media (max-width: 1023px) {
+  .style-1 .team-col--sm,
+.style-1 .team-col--lg {
+    width: 100%;
+  }
+}
+.style-1 .team-image {
+  overflow: hidden;
+}
+.style-1 img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 0 0 10px;
+}
+@media (max-width: 1023px) {
+  .style-1 img {
+    border-radius: 10px 10px 0 0;
+  }
+}
+.style-1 .team-subheading + .team-body {
+  margin-top: 18px;
+  margin-bottom: 0;
+}
+.style-1 .team-title {
+  margin: 0;
+}
+.style-1 .ui-team--social {
+  margin-top: 16px;
+}
+.style-1 figcaption {
+  padding: 32px;
+}
