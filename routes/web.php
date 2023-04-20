@@ -15,6 +15,8 @@ Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
     Route::get('lawyer','VisitorController@lawyer');
     //客户名录展示
     Route::get('customer','VisitorController@customer');
+    //行政人员展示
+    Route::get('admin','VisitorController@admin');
 });
 
 //后台登录处理路由组

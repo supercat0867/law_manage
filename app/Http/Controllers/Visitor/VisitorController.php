@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Visitor;
 
 use App\Model\Lawyer;
+use App\Model\Admins;
 use App\Model\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -56,5 +57,16 @@ class VisitorController extends Controller
                 }
             })->get();
         return view('visitor.lawyer',compact('lawyer'));
+    }
+
+    //返回行政人员展示页面
+    public function admin(Request $request){
+        $admin=Admins::where(function ($query) use ($request){
+            $adminname=$request->input('admin');
+            if (!empty($adminname)){
+                $query->where('name','like','%'.$adminname.'%');
+            }
+        })->get();
+        return view('visitor.admin',compact('admin'));
     }
 }

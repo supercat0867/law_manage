@@ -83,7 +83,7 @@
 						<span>团队简介</span>
 					</li>
 					<li>
-						<a class="dianji" href="/"></a>
+						<a class="dianji" href="/lvguan/admin"></a>
 						<img src="{{asset('visitor/images/icon2.png')}}" alt="">
 						<span>行政管理</span>
 					</li>
