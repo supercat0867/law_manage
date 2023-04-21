@@ -87,6 +87,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
     Route::post('lawyer/showon','LawyerController@showLawyer');
     //律师展示页修改表单
     Route::get('lawyer/{lawyer}/editshow','LawyerController@editShow');
+    //律师展示页修改
+    Route::put('lawyer/{lawyer}/update','LawyerController@updateShow');
+    //更换头像表单
+    Route::get('lawyer/{lawyer}/upload','LawyerController@uploadShow');
+    //上传头像
+    Route::post('lawyer/upload','LawyerController@upload');
+    //更换头像
+    Route::put('lawyer/upload/{lawyer}','LawyerController@change');
 
     //角色模块
     Route::resource('role','RoleController');
@@ -106,7 +114,11 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
     //管理员批量删除
     Route::post('admin/del','AdminController@delAll');
 
-    //行政人员管理模块哦
+    //行政人员管理模块
     Route::resource('admins','AdministController');
+    //行政人员隐藏
+    Route::post('admins/hidden','AdministController@hidden');
+    //行政人员展示
+    Route::post('admins/show','AdministController@show');
 
 });

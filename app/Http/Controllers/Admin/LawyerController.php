@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Lawyer;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class LawyerController extends Controller
 {
@@ -164,6 +166,7 @@ class LawyerController extends Controller
         }
         return $data;
     }
+
     //返回律师信息展示列表页
     public function show(Request $request)
     {
@@ -224,5 +227,84 @@ class LawyerController extends Controller
     {
         $lawyer=Lawyer::find($id);
         return view('admin.lawyer.editShow',compact('lawyer'));
+    }
+
+    //编辑律师展示页信息
+    public function updateShow(Request $request,$id)
+    {
+        $lawyer=Lawyer::where('lawyer_id',$id);
+        $lawyer_name=$request->input('name');
+        $education=$request->input('education');
+        $organization=$request->input('organization');
+        $introduction=$request->input('introduction');
+        $connectlink=$request->input('connectlink');
+        $res=$lawyer->update(['lawyer_name'=>$lawyer_name,'education'=>$education,'organization'=>$organization,'perintroduction'=>$introduction,'connectlink'=>$connectlink]);
+        if($res){
+                $data=[
+                    'status'=>0,
+                    'message'=>'修改成功',
+                ];
+            }
+        else{
+                $data=[
+                    'status'=>1,
+                    'message'=>'修改失败',
+                ];
+            }
+        return $data;
+    }
+    //更换头像表单
+    public function uploadshow($id)
+    {
+        $lawyer=Lawyer::find($id);
+        return view('admin.lawyer.image',compact('lawyer'));
+    }
+    //文件上传
+    public function upload(Request $request)
+    {
+        //获取上传文件
+        $file=$request->file('photo');
+        //判断上传文件是否成功
+        if(!$file->isValid()){
+            return response()->json(['ServerNo'=>'400','ResultData'=>'无效上传']);
+        }
+        else{
+            //获取源文件扩展名
+            $ext=$file->getClientOriginalExtension();
+            //新文件名
+            $newfile=time().rand(1000,9000).'.'.$ext;
+            //文件上传路径
+            $path=public_path('uploads');
+            //将源文件从临时目录移动到指定目录
+//            if(!$file->move($path,$newfile)){
+//                return response()->json(['ServerNo'=>'500','ResultData'=>'保存文件失败']);
+//            }
+            $res=Image::make($file)->save($path.'/'.$newfile);
+            if ($res){
+                return response()->json(['ServerNo'=>'200','ResultData'=>$newfile]);
+            }
+            else{
+                return response()->json(['ServerNo'=>'500','ResultData'=>'上传文件失败']);
+            }
+        }
+    }
+
+    public function change(Request $request,$id){
+        $source=public_path($request->input('path'));
+        $lawyer=Lawyer::find($id);
+        $dest=public_path($lawyer->perimgpath);
+        if(copy($source,$dest)){
+            $data=[
+                'status'=>0,
+                'message'=>'更换成功',
+            ];
+        }
+        else{
+            $data=[
+                'status'=>1,
+                'message'=>'更换失败',
+            ];
+        }
+        return $data;
     }
 }

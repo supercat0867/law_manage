@@ -131,11 +131,11 @@
           var operate=$(obj).attr('title');
           layer.confirm('确认要'+operate+'吗？',function(index){
 
-              if(operate=='停用'){
+              if(operate=='隐藏'){
 
                 $.ajax({
                   type:'POST',
-                  url:'/admin/user/stop',
+                  url:'/admin/admins/hidden',
                   dataType:'json',
                   data:{
                     _token: "{{csrf_token()}}",
@@ -143,9 +143,9 @@
                   },
                   success:function (data){
                     if(data.status==0){
-                      $(obj).attr('title','启用')
+                      $(obj).attr('title','展示')
                       $(obj).find('i').html('&#xe62f;');
-                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已隐藏');
                       layer.msg(data.message,{icon: 5,time:1000});
                     }
                     else {
@@ -157,7 +157,7 @@
               }else{
                 $.ajax({
                   type:'POST',
-                  url:'/admin/user/run',
+                  url:'/admin/admins/show',
                   dataType:'json',
                   data:{
                     _token: "{{csrf_token()}}",
@@ -165,9 +165,9 @@
                   },
                   success:function (data){
                     if(data.status==0){
-                      $(obj).attr('title','停用')
+                      $(obj).attr('title','隐藏')
                       $(obj).find('i').html('&#xe601;');
-                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已展示');
                       layer.msg(data.message,{icon: 6,time:1000});
                     }
                     else {

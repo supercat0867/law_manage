@@ -23,32 +23,48 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
-                <span class="x-red">*</span>用户名
+                <span class="x-red">*</span>姓名
             </label>
             <div class="layui-input-inline">
                 <input type="hidden" name="uid" value="{{$lawyer->lawyer_id}}">
-                <input type="text" id="L_username" name="username" value="{{$lawyer->lawyer_name}}" required="" lay-verify="nikename"
+                <input type="text" id="L_username" name="name" value="{{$lawyer->lawyer_name}}" required="" lay-verify="nikename"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label for="L_phone" class="layui-form-label">
-                <span class="x-red">*</span>手机号
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                <span class="x-red">*</span>学历信息
             </label>
-            <div class="layui-input-inline">
-                <input type="text" id="L_phone" name="phone" value="{{$lawyer->lawyer_phone}}" required="" lay-verify="phone" autocomplete="off" class="layui-input">
+            <div class="layui-input-block">
+                <textarea  id="desc" name="education" class="layui-textarea">{{$lawyer->education}}</textarea>
             </div>
-            <div class="layui-form-mid layui-word-aux">
-                <span class="x-red">*</span>将会成为律师的登入手机号
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                <span class="x-red">*</span>专业方向
+            </label>
+            <div class="layui-input-block">
+                <textarea  id="desc" name="organization" class="layui-textarea">{{$lawyer->organization}}</textarea>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label for="desc" class="layui-form-label">
+                <span class="x-red">*</span>个人介绍
+            </label>
+            <div class="layui-input-block">
+                <textarea  id="desc" name="introduction" class="layui-textarea">{{$lawyer->perintroduction}}</textarea>
             </div>
         </div>
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
-                <span class="x-red">*</span>职务
+                <span class="x-red">*</span>聊天链接
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="L_username" name="duty" value="{{$lawyer->duty}}" required=""
+                <input type="text" id="L_username" name="link" value="{{$lawyer->connectlink}}"
                        autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>暂未开放，留空即可
             </div>
         </div>
         <div class="layui-form-item">
@@ -81,7 +97,7 @@
             //发异步，把数据提交给php
             $.ajax({
                 type:'PUT',
-                url:'/admin/lawyer/'+uid,
+                url:'/admin/lawyer/'+uid+'/update',
                 dataType:'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -102,12 +118,9 @@
                 error:function (){
                     //错误信息
                 }
-
             })
-
             return false;
         });
-
 
     });
 </script>

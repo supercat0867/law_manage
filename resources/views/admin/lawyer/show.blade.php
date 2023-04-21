@@ -88,6 +88,9 @@
               <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/lawyer/'.$v->lawyer_id.'/editshow')}}',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
+              <a title="更换头像"  onclick="x_admin_show('更换头像','{{url('admin/lawyer/'.$v->lawyer_id.'/upload')}}',600,400)" href="javascript:;">
+                <i class="layui-icon">&#xe60d;</i>
+              </a>
             </td>
           </tr>
         @endforeach

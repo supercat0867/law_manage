@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 20/04/2023 16:51:36
+ Date: 20/04/2023 17:39:34
 */
 
 SET NAMES utf8mb4;
@@ -76,7 +76,7 @@ INSERT INTO `law_administration` VALUES (2, '胡志国', '13888888888', 'adminIm
 INSERT INTO `law_administration` VALUES (3, '冯真平', '13777777777', 'adminImage/feng.jpg', '发展部副主任；主要负责开拓法律市场、案源对接、客户维护', '四川大学法学专业（在读）', '四川毫达（凉山）律师事务所：管委会副主任 ', 1);
 INSERT INTO `law_administration` VALUES (4, '王潇', '13999999999', 'adminImage/xiao.jpg', '发展部副主任；主要负责案源对接', '四川大学MBA', '担任毫达律师事务所执行主任；曾就职某政府部门，具有较强的协调能力和管理能力。', 1);
 INSERT INTO `law_administration` VALUES (5, '柴俊霏', '13000000000', 'adminImage/chai.jpg', '新媒体中心主管；主要负责新闻的编辑、发布及公众号后台的管理', '加利福尼亚大学本科', '曾就职于安盛天平财产保险有限公司综合部，有较强的工作协调能力，拥有流利的英语沟通能力。', 1);
-INSERT INTO `law_administration` VALUES (6, '唐博浩', '18382117550', 'adminImage/tang.jpg', '技术部', '电子科技大学本科', '本科信息安全专业，有独立开发经验。', 1);
+INSERT INTO `law_administration` VALUES (6, '唐博浩', '18382117550', 'adminImage/tang.jpg', '技术部；主要负责公众号功能开发', '电子科技大学本科', '本科信息安全专业，有独立开发经验。', 1);
 
 -- ----------------------------
 -- Table structure for law_customer

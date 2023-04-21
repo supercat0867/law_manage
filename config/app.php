@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         mews\captcha\CaptchaServiceProvider::class,//验证码
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -195,6 +196,7 @@ return [
 
         //验证码
         'Captcha' => mews\captcha\CaptchaServiceProvider::class,
+        'Image'=>Intervention\Image\Facades\Image::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
