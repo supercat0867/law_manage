@@ -259,6 +259,7 @@ class LawyerController extends Controller
         $lawyer=Lawyer::find($id);
         return view('admin.lawyer.image',compact('lawyer'));
     }
+
     //文件上传
     public function upload(Request $request)
     {
@@ -289,6 +290,7 @@ class LawyerController extends Controller
         }
     }
 
+    //更换头像
     public function change(Request $request,$id){
         $source=public_path($request->input('path'));
         $lawyer=Lawyer::find($id);

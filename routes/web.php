@@ -19,6 +19,22 @@ Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
     Route::get('admin','VisitorController@admin');
 });
 
+//登录前台
+Route::get('/login','isLogin\LoginController@login');
+//处理登录逻辑
+Route::post('/code','isLogin\LoginController@getCode');
+
+
+//登录后可查看
+Route::group(['prefix'=>'lvguan','namespace'=>'isLogin'],function (){
+    //查看案件信息
+    Route::get('case/{id}/info','CaseController@caseInfo');
+    //案件材料路由
+    Route::get('case/data','CaseController@caseData');
+    //预览案件材料
+    Route::get('case/preview','CaseController@preview');
+});
+
 //后台登录处理路由组
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
     //后台登录路由
@@ -121,4 +137,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
     //行政人员展示
     Route::post('admins/show','AdministController@show');
 
+    //文章管理模块
+    Route::resource('article','ArticleController');
 });

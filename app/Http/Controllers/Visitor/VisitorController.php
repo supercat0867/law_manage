@@ -18,7 +18,7 @@ class VisitorController extends Controller
     //返回查询下载中心页面
     public function guide()
     {
-        return view("guide.index");
+        return view("visitor.guide");
     }
     //返回团队介绍界面
     public function info()
