@@ -12,14 +12,7 @@
                     <li>
                         <a _href="{{url('/admin/user')}}">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>个案客户列表</cite>
-
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="{{url('/admin/user')}}">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>常法客户列表</cite>
+                            <cite>客户列表</cite>
 
                         </a>
                     </li >

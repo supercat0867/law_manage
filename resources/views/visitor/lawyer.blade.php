@@ -22,7 +22,7 @@
                 <div class="col-lg-6">
                     <form action="" method="get">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="请输入律师姓名" name="lawyer">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="请输入律师姓名" name="lawyer" value="{{$lawyername}}">
                         </div>
                     </form>
                 </div>

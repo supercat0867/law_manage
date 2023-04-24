@@ -21,18 +21,24 @@ Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
 
 //登录前台
 Route::get('/login','isLogin\LoginController@login');
-//处理登录逻辑
+//获取验证码
 Route::post('/code','isLogin\LoginController@getCode');
-
+//处理登录逻辑
+Route::post('/dologin','isLogin\LoginController@dologin');
 
 //登录后可查看
-Route::group(['prefix'=>'lvguan','namespace'=>'isLogin'],function (){
+Route::group(['prefix'=>'lvguan','namespace'=>'isLogin','middleware'=>'IsLogin'],function (){
+    //查看个人案件
+    Route::get('case','CaseController@case');
     //查看案件信息
     Route::get('case/{id}/info','CaseController@caseInfo');
     //案件材料路由
     Route::get('case/data','CaseController@caseData');
     //预览案件材料
     Route::get('case/preview','CaseController@preview');
+    //常法服务中心
+    Route::get('daily','DailyController@index');
+
 });
 
 //后台登录处理路由组

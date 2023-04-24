@@ -50,7 +50,7 @@
         margin: 0 auto;
     }
     .list li{
-        height: 70px;
+        height: 50px;
         /* background: skyblue; */
         border-radius: 5px;
         padding: 10px 12px;
@@ -72,7 +72,7 @@
         height: 50px;
     }
     .list li p{
-        font-size: 16px;
+        font-size: 12px;
         font-weight: bold;
         /* padding-left: 15px; */
     }
@@ -129,52 +129,25 @@
 <div class="wrap">
     <div class="content">
         <p class="name">个案查询中心</p>
-        <form class="fom" action="" method="post">
-            <input class="inp1" type="text" name="searchInfo" placeholder="输入案号、时间、当事人姓名">
+        <form class="fom" action="" method="get">
+            <input class="inp1" type="text" name="key" placeholder="输入案号、时间、当事人姓名" value="{{$key}}">
         </form>
         <ul class="list">
-            <?php
-            include "../lib/database.php";
-            if($_SESSION['power']==1){
-                if (isset($_POST['searchInfo'])&&$_POST['searchInfo']!=null){
-                    if(is_numeric($_POST['searchInfo'])){
-                        $sql="select caseid,casetitle,lawyer,caseclient from caseinfo where lawyerphone='{$_COOKIE['phone']}'and caseid like '%{$_POST['searchInfo']}%' order by caseid DESC ";
-                    }
-                    else{
-                        $sql="select caseid,casetitle,lawyer,caseclient from caseinfo where lawyerphone='{$_COOKIE['phone']}'and caseclient like '%{$_POST['searchInfo']}%' order by caseid DESC ";
-                    }
-                }
-                else{
-                    $sql="select caseid,casetitle,lawyer,caseclient from caseinfo where lawyerphone='{$_COOKIE['phone']}' order by caseid DESC ";
-                }
-            }
-            else{
-                if (isset($_POST['search'])){
-                    if(is_numeric($_POST['searchInfo'])){
-                        $sql="select caseid,casetitle,lawyer,caseclient from caseinfo where clientphone='{$_COOKIE['phone']}'and caseid like '%{$_POST['searchInfo']}%' order by caseid DESC ";
-                    }
-                    else{
-                        $sql="select caseid,casetitle,lawyer,caseclient from caseinfo where clientphone='{$_COOKIE['phone']}'and caseclient like '%{$_POST['searchInfo']}%' order by caseid DESC ";
-                    }
-                }
-                else{
-                    $sql="select * from caseinfo where clientphone='{$_COOKIE['phone']}' order by caseid DESC";
-                }
-            }
-            $conn=ConnMySQL();
-            $result=mysqli_query($conn,$sql);
-            while ($row=mysqli_fetch_array($result)){
-                echo "<li>";
-                echo '<a class="dianji" href="case_content?caseid='.$row['caseid'].'&title='.$row['casetitle'].'&lawyer='.$row['lawyer'].'"></a>';
-                echo '<p><span>'.$row['casetitle'].' 当事人：'.$row['caseclient'].'</span>';
-                echo '<p><span>案号：'.$row['caseid'].'</span>';
-                echo "</li>";
-            }
-            ?>
+            @if(!$case)
+                <p style="font-size: 20px;text-align: center">暂无案件</p>
+            @else
+                @foreach($case as $v)
+                    <li>
+                        <a class="dianji" href="case/{{$v->caseid}}/info">
+                        </a>
+                        <p><span>{{$v->title}}</span>
+                        <p><span>案号：{{$v->caseid}}</span>
+                    </li>
+                @endforeach
+            @endif
         </ul>
     </div>
 </div>
-
 </body>
 </html>
 

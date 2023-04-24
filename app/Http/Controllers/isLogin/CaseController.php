@@ -9,6 +9,44 @@ use App\Http\Controllers\Controller;
 
 class CaseController extends Controller
 {
+    //个人案件列表
+    public function case(Request $request)
+    {
+        $power=session()->get('~__~');
+        $phone=session()->get('phone');
+        $key=$request->input('key');
+        if ($power=='0526'){
+            if ($key){
+                if (is_numeric($key)){
+                    $case=CaseInfo::orderBy('caseid','asc')->where('party_phone',$phone)->where('caseid','like','%'.$key.'%')->get();
+                }
+                else{
+                    $case=CaseInfo::orderBy('caseid','asc')->where('party_phone',$phone)->where('title','like','%'.$key.'%')->get();
+                }
+            }
+            else{
+                $case=CaseInfo::orderBy('caseid','asc')->where('party_phone',$phone)->get();
+            }
+        }
+        elseif($power=='0710'){
+            if ($key){
+                if (is_numeric($key)){
+                    $case=CaseInfo::orderBy('caseid','asc')->where('lawyer_phone',$phone)->where('caseid','like','%'.$key.'%')->get();
+                }
+                else{
+                    $case=CaseInfo::orderBy('caseid','asc')->where('lawyer_phone',$phone)->where('title','like','%'.$key.'%')->get();
+                }
+            }
+            else{
+                $case=CaseInfo::orderBy('caseid','asc')->where('lawyer_phone',$phone)->get();
+            }
+        }
+        else{
+            $case=[];
+        }
+        return view("center.case",compact("case","key"));
+    }
+
     //查看案件信息
     public function caseInfo($id)
     {

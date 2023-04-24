@@ -43,6 +43,7 @@ class VisitorController extends Controller
 
     //返回律师展示页面
     public function lawyer(Request $request){
+        $lawyername=$request->input('lawyer');
         $lawyer=Lawyer::where(function ($query) use ($request){
                 $lawyername=$request->input('lawyer');
                 $group=$request->input('type');
@@ -56,7 +57,7 @@ class VisitorController extends Controller
                     $query->where('lawyer_name','like','%'.$lawyername.'%');
                 }
             })->get();
-        return view('visitor.lawyer',compact('lawyer'));
+        return view('visitor.lawyer',compact('lawyer','lawyername'));
     }
 
     //返回行政人员展示页面

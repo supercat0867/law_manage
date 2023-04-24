@@ -89,12 +89,24 @@ function login(){
     }
     else{
         $.ajax({
-            url:"./controller/Validator.php",
+            url:"/dologin",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             type: "POST",
-            data:"phone2="+phone+"&code="+code+"&targetPage="+targetPage,
-            dataType:'text',
+            data:{
+                phone:phone,
+                code:code,
+                targetPage:targetPage
+            },
+            dataType:'json',
             success:function (data){
-                window.location.href=data;
+                if (data.status==1){
+                    window.location.href=data.target;
+                }
+                else{
+                    alert(data.message);
+                }
             }
         });
     }
