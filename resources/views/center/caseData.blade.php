@@ -22,7 +22,7 @@
                     @foreach($path as $k=>$v)
                         <a href="/lvguan/case/preview?path={{$v}}" style="height: 100px;width: 100px"><li style="font-size: 30px">
                                 <span class="line"></span>
-                                <i class="icon fab fa-gg"></i>{{$k}}--点击预览
+                                <i class="icon fab fa-gg"></i>{{$k}}
                             </li></a>
                     @endforeach
                 @else

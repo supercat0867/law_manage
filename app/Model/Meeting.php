@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CaseProgress extends Model
+class Meeting extends Model
 {
-    public $table='case_progress';
-    public $primaryKey='caseid';
+    public $table='meeting';
+    public $primaryKey='id';
     public $guarded=[];
     public $timestamps=false;
 }

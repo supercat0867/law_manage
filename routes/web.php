@@ -12,7 +12,7 @@ Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
     //法律咨询选择路由
     Route::get('advice','VisitorController@advice');
     //律师展示页面路由
-    Route::get('lawyer','VisitorController@lawyer');
+    Route::get('lawyers','VisitorController@lawyer');
     //客户名录展示
     Route::get('customer','VisitorController@customer');
     //行政人员展示
@@ -38,7 +38,57 @@ Route::group(['prefix'=>'lvguan','namespace'=>'isLogin','middleware'=>'IsLogin']
     Route::get('case/preview','CaseController@preview');
     //常法服务中心
     Route::get('daily','DailyController@index');
+    //会务记录
+    Route::get('daily/meeting','DailyController@meeting');
+    //会议内容
+    Route::get('daily/{id}/meeting','DailyController@meetcontent');
+    //微信沟通群
+    Route::get('daily/wxgroup','DailyController@wxgroup');
+    //微信沟通群
+    Route::get('daily/wxgroup/info','DailyController@wxgroup1');
+    //合同修改
+    Route::get('daily/contract','DailyController@contract');
+    //合同修改
+    Route::get('daily/contract/info','DailyController@contract1');
+    //合同上传接口
+    Route::post('daily/contract/uploads','DailyController@upload');
 
+});
+
+//律师专栏
+Route::group(['prefix'=>'lvguan','namespace'=>'isLogin','middleware'=>['IsLogin','IsLawyer']],function () {
+    //律师专栏
+    Route::get('lawyer','LawyerController@index');
+    //案件信息上传表单
+    Route::get('lawyer/form/caseinfo','LawyerController@caseform');
+    //案件信息上传接口
+    Route::post('lawyer/post/case','LawyerController@case');
+    //案件选择页面
+    Route::get('lawyer/{op}/select/case','LawyerController@selectcase');
+    //案件进度上传表单
+    Route::get('lawyer/{id}/progress','LawyerController@progressform');
+    //案件进度上传接口
+    Route::post('lawyer/post/progress','LawyerController@progress');
+    //案件材料选择
+    Route::get('lawyer/{id}/data','LawyerController@data');
+    //案件材料上传接口
+    Route::post('lawyer/post/data','LawyerController@postdata');
+    //案件材料
+    Route::get('lawyer/data/case','LawyerController@casedata');
+    //服务单位上传表单
+    Route::get('lawyer/form/custo','LawyerController@custoform');
+    //服务单位上传接口
+    Route::post('lawyer/post/custo','LawyerController@custo');
+    //会务记录上传表单
+    Route::get('lawyer/form/meeting','LawyerController@meetform');
+    //会务记录上传接口
+    Route::post('lawyer/post/meeting','LawyerController@meeting');
+    //微信沟通群上传/修改表单
+    Route::get('lawyer/form/wxgroup','LawyerController@wxgroup');
+    //微信图片上传
+    Route::post('lawyer/post/ercode','LawyerController@ercode');
+    //更换图片
+    Route::put('lawyer/put/{id}','LawyerController@change');
 });
 
 //后台登录处理路由组
@@ -52,7 +102,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
 });
 
 //提示无权限
-Route::get('noaccess','Admin\LoginController@noaccess');
+Route::get('/noaccess','Admin\LoginController@noaccess');
 
 //后台操作路由组
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'AdminIsLogin'],function (){

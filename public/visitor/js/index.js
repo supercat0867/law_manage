@@ -4,19 +4,19 @@ let data = [
         children: [
             {
                 title: "刑事辩护专业委员会",
-                url: "/lvguan/lawyer?type=刑事辩护专业委员会"
+                url: "/lvguan/lawyers?type=刑事辩护专业委员会"
             },
             {
                 title: "刑民交叉案专业委员会",
-                url: "/lvguan/lawyer?type=刑民交叉案专业委员会"
+                url: "/lvguan/lawyers?type=刑民交叉案专业委员会"
             },
             {
                 title: "军事法庭受理案件专业委员会",
-                url: "/lvguan/lawyer?type=军事法庭受理案件专业委员会"
+                url: "/lvguan/lawyers?type=军事法庭受理案件专业委员会"
             },
             {
                 title: "企业合规不诉专业委会",
-                url: "/lvguan/lawyer?type=企业合规不诉专业委会"
+                url: "/lvguan/lawyers?type=企业合规不诉专业委会"
             }
         ]
     },
@@ -25,59 +25,59 @@ let data = [
         children: [
             {
                 title: "企业合规专业委员会",
-                url: "/lvguan/lawyer?type=企业合规专业委员会"
+                url: "/lvguan/lawyers?type=企业合规专业委员会"
             },
             {
                 title: "政府法律顾问专业委员会",
-                url: "/lvguan/lawyer?type=政府法律顾问专业委员会"
+                url: "/lvguan/lawyers?type=政府法律顾问专业委员会"
             },
             {
                 title: "企业法律顾问专业委员会",
-                url: "/lvguan/lawyer?type=企业法律顾问专业委员会"
+                url: "/lvguan/lawyers?type=企业法律顾问专业委员会"
             },
             {
                 title: "破产清算、重组、重整专业委员会",
-                url: "/lvguan/lawyer?type=破产清算、重组、重整专业委员会"
+                url: "/lvguan/lawyers?type=破产清算、重组、重整专业委员会"
             },
             {
                 title: "建筑工程纠纷类专业委员会",
-                url: "/lvguan/lawyer?type=建筑工程纠纷类专业委员会"
+                url: "/lvguan/lawyers?type=建筑工程纠纷类专业委员会"
             },
             {
                 title: "矿山纠纷类专业委员会",
-                url: "/lvguan/lawyer?type=矿山纠纷类专业委员会"
+                url: "/lvguan/lawyers?type=矿山纠纷类专业委员会"
             },
             {
                 title: "民间借贷纠纷类专业委员会",
-                url: "/lvguan/lawyer?type=民间借贷纠纷类专业委员会"
+                url: "/lvguan/lawyers?type=民间借贷纠纷类专业委员会"
             },
             {
                 title: "公司股权纠纷类专业委员会",
-                url: "/lvguan/lawyer?type=公司股权纠纷类专业委员会"
+                url: "/lvguan/lawyers?type=公司股权纠纷类专业委员会"
             },
             {
                 title: "婚姻、家庭纠纷类专业委员会",
-                url: "/lvguan/lawyer?type=婚姻、家庭纠纷类专业委员会"
+                url: "/lvguan/lawyers?type=婚姻、家庭纠纷类专业委员会"
             },
             {
                 title: "专利、著作权纠纷类专业委员会",
-                url: "/lvguan/lawyer?type=专利、著作权纠纷类专业委员会"
+                url: "/lvguan/lawyers?type=专利、著作权纠纷类专业委员会"
             },
             {
                 title: "不良资产处置专业委员会",
-                url: "/lvguan/lawyer?type=不良资产处置专业委员会"
+                url: "/lvguan/lawyers?type=不良资产处置专业委员会"
             },
             {
                 title: "保险理赔纠纷专业委员会",
-                url: "/lvguan/lawyer?type=保险理赔纠纷专业委员会"
+                url: "/lvguan/lawyers?type=保险理赔纠纷专业委员会"
             },
             {
                 title: "信托与家族财富管理专业委员会",
-                url: "/lvguan/lawyer?type=信托与家族财富管理专业委员会"
+                url: "/lvguan/lawyers?type=信托与家族财富管理专业委员会"
             },
             {
                 title: "裁决、判决执行专业委员会",
-                url: "/lvguan/lawyer?type=裁决、判决执行专业委员会"
+                url: "/lvguan/lawyers?type=裁决、判决执行专业委员会"
             }
         ]
     },
@@ -86,15 +86,15 @@ let data = [
         children: [
             {
                 title: "行政诉讼专业委员会",
-                url: "/lvguan/lawyer?type=行政诉讼专业委员会"
+                url: "/lvguan/lawyers?type=行政诉讼专业委员会"
             },
             {
                 title: "征地拆迁补偿纠纷专业委员会",
-                url: "/lvguan/lawyer?type=征地拆迁补偿纠纷专业委员会"
+                url: "/lvguan/lawyers?type=征地拆迁补偿纠纷专业委员会"
             },
             {
                 title: "政府立法专业委员会",
-                url: "/lvguan/lawyer?type=政府立法专业委员会"
+                url: "/lvguan/lawyers?type=政府立法专业委员会"
             },
         ]
     },
@@ -103,11 +103,11 @@ let data = [
         children: [
             {
                 title: "税务筹划专业委员会",
-                url: "/lvguan/lawyer?type=税务筹划专业委员会"
+                url: "/lvguan/lawyers?type=税务筹划专业委员会"
             },
             {
                 title: "股权架构设计专业委员会",
-                url: "/lvguan/lawyer?type=股权架构设计专业委员会"
+                url: "/lvguan/lawyers?type=股权架构设计专业委员会"
             },
         ]
     },
@@ -116,7 +116,7 @@ let data = [
         children: [
             {
                 title: "法研专家",
-                url: "/lvguan/lawyer?type=法研专家"
+                url: "/lvguan/lawyers?type=法研专家"
             }
         ]
     }];
