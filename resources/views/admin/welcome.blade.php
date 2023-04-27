@@ -72,67 +72,59 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </fieldset>--}}
-{{--        <fieldset class="layui-elem-field">--}}
-{{--            <legend>系统通知</legend>--}}
-{{--            <div class="layui-field-box">--}}
-{{--                <table class="layui-table" lay-skin="line">--}}
-{{--                    <tbody>--}}
-{{--                        <tr>--}}
-{{--                            <td >--}}
-{{--                                <a class="x-a" href="/" target="_blank">新版x-admin 2.0上线了</a>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td >--}}
-{{--                                <a class="x-a" href="/" target="_blank">交流qq群:(519492808)</a>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                    </tbody>--}}
-{{--                </table>--}}
-{{--            </div>--}}
-{{--        </fieldset>--}}
-{{--        <fieldset class="layui-elem-field">--}}
-{{--            <legend>系统信息</legend>--}}
-{{--            <div class="layui-field-box">--}}
-{{--                <table class="layui-table">--}}
-{{--                    <tbody>--}}
-{{--                        <tr>--}}
-{{--                            <th>系统版本</th>--}}
-{{--                            <td>2.1</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>服务器地址</th>--}}
-{{--                            <td>localhost</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>操作系统</th>--}}
-{{--                            <td>WINNT</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>运行环境</th>--}}
-{{--                            <td>Apache/2.4.23 (Win32) OpenSSL/1.0.2j mod_fcgid/2.3.9</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>PHP版本</th>--}}
-{{--                            <td>5.6.27</td></tr>--}}
+        <fieldset class="layui-elem-field">
+            <legend>系统通知</legend>
+            <div class="layui-field-box">
+                <table class="layui-table" lay-skin="line">
+                    <tbody>
+                        <tr>
+                            <td >
+                                <a class="x-a" target="_blank">律冠2.0 上线啦！</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+        <fieldset class="layui-elem-field">
+            <legend>系统信息</legend>
+            <div class="layui-field-box">
+                <table class="layui-table">
+                    <tbody>
+                        <tr>
+                            <th>系统版本</th>
+                            <td>{{ php_uname('r')}}</td></tr>
+                        <tr>
+                            <th>服务器地址</th>
+                            <td>{{$_SERVER["HTTP_HOST"]}}</td></tr>
+                        <tr>
+                            <th>操作系统</th>
+                            <td>{{ PHP_OS}}</td></tr>
+                        <tr>
+                            <th>运行环境</th>
+                            <td>{{ php_sapi_name()}}</td></tr>
+                        <tr>
+                            <th>PHP版本</th>
+                            <td>{{ PHP_VERSION}}</td></tr>
 {{--                        <tr>--}}
 {{--                            <th>PHP运行方式</th>--}}
-{{--                            <td>cgi-fcgi</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>MYSQL版本</th>--}}
-{{--                            <td>5.5.53</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>ThinkPHP</th>--}}
-{{--                            <td>5.0.18</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>上传附件限制</th>--}}
-{{--                            <td>2M</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>执行时间限制</th>--}}
-{{--                            <td>30s</td></tr>--}}
-{{--                        <tr>--}}
-{{--                            <th>剩余空间</th>--}}
-{{--                            <td>86015.2M</td></tr>--}}
-{{--                    </tbody>--}}
-{{--                </table>--}}
-{{--            </div>--}}
-{{--        </fieldset>--}}
+{{--                            <td>{{PHP_SAPI}}</td></tr>--}}
+                        <tr>
+                            <th>Laravel</th>
+                            <td>{{app()::VERSION}}</td></tr>
+                        <tr>
+                            <th>上传附件限制</th>
+                            <td>{{ini_get('post_max_size')}}</td></tr>
+                        <tr>
+                            <th>执行时间限制</th>
+                            <td>{{ini_get('max_execution_time')}}s</td></tr>
+                        <tr>
+                            <th>剩余空间</th>
+                            <td>{{disk_free_space('.')/(1024*1024*1024)}}GB</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
         <fieldset class="layui-elem-field">
             <legend>开发团队</legend>
             <div class="layui-field-box">
@@ -152,14 +144,5 @@
         </fieldset>
 {{--        <blockquote class="layui-elem-quote layui-quote-nm"></blockquote>--}}
     </div>
-        <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
     </body>
 </html>

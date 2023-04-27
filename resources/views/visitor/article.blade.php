@@ -21,12 +21,17 @@
 <div class="blog-home section">
     <div class="container">
         @foreach($article as $v)
-            <div class="row"><div class="col s12"><div class="content">
-                        <img src='{{asset($v->cover)}}'>
-                        <div class="post"><div class="category"></div>
-                            <h3><a href="{{$v->link}}">{{$v->title}}</a></h3>
-                            <div class="date">'.$row['time'].'</div>
-                        </div></div></div></div>
+            @if($v->status==1)
+                <div class="row"><div class="col s12"><div class="content">
+                            <img src='{{asset($v->cover)}}'>
+                            <div class="post"><div class="category"></div>
+                                <h3><a href="{{$v->link}}">{{$v->title}}</a></h3>
+                                <div class="date">{{$v->created_at}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         @endforeach
                 <!--			<div class="pagination-blog-home">-->
         <!--				<ul>-->

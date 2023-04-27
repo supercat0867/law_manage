@@ -100,7 +100,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
     //后台登录处理路由
     Route::post('dologin','LoginController@doLogin');
     //加密算法
-    Route::get('jiami','LoginController@jiami');
+//    Route::get('jiami','LoginController@jiami');
 });
 
 //提示无权限
@@ -203,4 +203,17 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
 
     //文章管理模块
     Route::resource('article','ArticleController');
+    //文章批量删除
+    Route::post('article/del','ArticleController@delAll');
+    //文章隐藏
+    Route::post('article/stop','ArticleController@stop');
+    //文章展示
+    Route::post('article/run','ArticleController@run');
+    //更换封面表单
+    Route::get('article/{id}/upload','ArticleController@cover');
+    //上传封面
+    Route::post('article/upload','ArticleController@upload');
+    //更换封面
+    Route::put('article/upload/{id}','ArticleController@change');
+
 });

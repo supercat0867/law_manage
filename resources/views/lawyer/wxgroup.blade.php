@@ -31,7 +31,7 @@
             <input type="file" name="photo" id="photo_upload" style="visibility: hidden;">
         </div>
         <div class="layui-form-item">
-            <img src="" alt="" id="art_thumb_img" style="width: 200px;height: 200px">
+            <img src="" alt="" id="art_thumb_img" style="width: 300px;height: 400px;visibility: hidden;">
         </div>
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">
@@ -66,6 +66,7 @@
                         success:function (data){
                             if(data['ServerNo']=='200'){
                                 $('#art_thumb_img').attr('src','/uploads/'+data['ResultData']);
+                                $('#art_thumb_img').css('visibility','visible');
                                 $(obj).off('change');
                             }
                             else {

@@ -113,7 +113,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="admin-list.html">
+                        <a _href="{{asset('/admin/article')}}">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>文章列表</cite>
                         </a>
