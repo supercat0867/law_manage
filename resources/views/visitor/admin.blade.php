@@ -2,7 +2,7 @@
 <html lang="">
 <head>
     <meta charset="utf-8">
-    <title>律冠精英律师团</title>
+    @include("public.title")
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{asset('visitor/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('visitor/css/teams-ui.css')}}">

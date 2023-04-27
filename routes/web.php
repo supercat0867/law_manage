@@ -17,6 +17,8 @@ Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
     Route::get('customer','VisitorController@customer');
     //行政人员展示
     Route::get('admin','VisitorController@admin');
+    //律冠法研
+    Route::get('article','VisitorController@article');
 });
 
 //登录前台
@@ -192,6 +194,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
     Route::post('admins/hidden','AdministController@hidden');
     //行政人员展示
     Route::post('admins/show','AdministController@show');
+    //更换头像表单
+    Route::get('admins/{id}/upload','AdministController@header');
+    //上传头像
+    Route::post('admins/upload','AdministController@upload');
+    //更换头像
+    Route::put('admins/upload/{id}','AdministController@change');
 
     //文章管理模块
     Route::resource('article','ArticleController');

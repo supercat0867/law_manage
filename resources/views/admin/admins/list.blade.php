@@ -43,7 +43,7 @@
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加客户','{{url("admin/user/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加客户','{{url("admin/admins/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：{{$count}} 条</span>
       </xblock>
       <table class="layui-table">
@@ -94,6 +94,9 @@
             <td class="td-manage">
               <a onclick="member_stop(this,{{$v->id}})" href="javascript:;"  title="{{$operate}}">
                 <i class="layui-icon">{{$icon}}</i>
+              </a>
+              <a title="更换头像"  onclick="x_admin_show('更换头像','{{url('admin/admins/'.$v->id.'/upload')}}',600,400)" href="javascript:;">
+                <i class="layui-icon">&#xe60d;</i>
               </a>
               <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/user/'.$v->id.'/edit')}}',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>

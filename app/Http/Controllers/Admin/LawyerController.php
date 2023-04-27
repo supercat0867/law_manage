@@ -291,10 +291,12 @@ class LawyerController extends Controller
     }
 
     //更换头像
-    public function change(Request $request,$id){
+    public function change(Request $request,$id)
+    {
         $source=public_path($request->input('path'));
-        $lawyer=Lawyer::find($id);
-        $dest=public_path($lawyer->perimgpath);
+        $path='lawyerImage/'.time().rand(1000,9000).'.jpg';
+        Lawyer::where('lawyer_id',$id)->update(['perimgpath'=>$path]);
+        $dest=public_path($path);
         if(copy($source,$dest)){
             $data=[
                 'status'=>0,

@@ -73,7 +73,10 @@
             <td>{{$v->customer_id}}</td>
             <td>{{$v->customer_name}}</td>
             <td>{{$v->customer_phone}}</td>
-            <td>{{$v->lawyer}}</td>
+            @php
+            $lawyer=\App\Model\Lawyer::where('lawyer_id',$v->lawyer_id)->first()->lawyer_name
+            @endphp
+            <td>{{$lawyer}}</td>
             <td>{{$v->created_at}}</td>
             <td>{{$v->updated_at}}</td>
             @php

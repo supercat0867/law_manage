@@ -275,7 +275,7 @@ class LawyerController extends Controller
         else{
             //获取源文件扩展名
             $ext=$file->getClientOriginalExtension();
-            $imgs=array('jpg','png');
+            $imgs=array('jpg','png','jpeg');
             if (!in_array($ext,$imgs)){
                 return response()->json(['ServerNo'=>'300','ResultData'=>"文件格式只能为jpg,png"]);
             }

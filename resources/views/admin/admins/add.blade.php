@@ -22,14 +22,14 @@
         <form class="layui-form">
             <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">
-                    <span class="x-red">*</span>客户名
+                    <span class="x-red">*</span>姓名
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                    <input type="text" id="L_username" name="adminname" required="" lay-verify="nikename"
                            autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入客户的真实姓名
+                    <span class="x-red">*</span>输入行政人员的真实姓名
                 </div>
             </div>
           <div class="layui-form-item">
@@ -41,19 +41,33 @@
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为客户的登入手机号
+                  <span class="x-red">*</span>输入行政人员的手机号
               </div>
           </div>
           <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">
-                    <span class="x-red">*</span>负责人
+                    <span class="x-red">*</span>学历信息
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="lawyer" required="" lay-verify="nikename"
+                    <input type="text" id="L_username" name="education"
                            autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入律师姓名
+          </div>
+          <div class="layui-form-item">
+                <label for="L_username" class="layui-form-label">
+                    <span class="x-red">*</span>职务
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_username" name="duty"
+                           autocomplete="off" class="layui-input">
+                </div>
+          </div>
+          <div class="layui-form-item layui-form-text">
+                <label for="desc" class="layui-form-label">
+                    <span class="x-red">*</span>个人介绍
+                </label>
+                <div class="layui-input-block">
+                    <textarea  id="desc" name="intro" class="layui-textarea"></textarea>
                 </div>
           </div>
           <div class="layui-form-item">
@@ -70,7 +84,6 @@
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
-        
           //自定义验证规则
           form.verify({
             nikename: function(value){
@@ -79,13 +92,12 @@
               }
             }
           });
-
           //监听提交
           form.on('submit(add)', function(data){
             //发异步，把数据提交给php
               $.ajax({
                   type:'POST',
-                  url:'/admin/user',
+                  url:'/admin/admins',
                   dataType:'json',
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

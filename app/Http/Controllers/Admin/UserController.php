@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Model\Customer;
+use App\Model\Lawyer;
 use App\Model\Unit;
 
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class UserController extends Controller
     //返回添加客户页面
     public function create()
     {
-        return view('admin.user.add');
+        $lawyer=Lawyer::get();
+        return view('admin.user.add',compact('lawyer'));
     }
 
     //执行添加客户操作
@@ -43,7 +45,7 @@ class UserController extends Controller
             ];
         }
         else{
-            $res= Customer::create(['customer_name'=>$input['username'],'customer_phone'=>$input['phone'],'lawyer'=>$input['lawyer']]);
+            $res= Customer::create(['customer_name'=>$input['username'],'customer_phone'=>$input['phone'],'lawyer_id'=>$input['lawyer']]);
             if($res){
                 $data=[
                     'status'=>2,

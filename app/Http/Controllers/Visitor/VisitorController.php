@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Visitor;
 
+use App\Model\Article;
 use App\Model\Lawyer;
 use App\Model\Admins;
 use App\Model\Unit;
@@ -69,5 +70,11 @@ class VisitorController extends Controller
             }
         })->get();
         return view('visitor.admin',compact('admin'));
+    }
+    //返回律冠法研页面
+    public function article()
+    {
+        $article=Article::get();
+        return view('visitor.article',compact('article'));
     }
 }

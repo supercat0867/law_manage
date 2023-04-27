@@ -46,14 +46,19 @@
           </div>
           <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">
-                    <span class="x-red">*</span>负责人
+                    <span class="x-red">*</span>律师
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="lawyer" required="" lay-verify="nikename"
-                           autocomplete="off" class="layui-input">
+                    <select name="lawyer" id="" autocomplete="off" class="layui-input">
+                        @foreach($lawyer as $v)
+                            <option value="{{$v->lawyer_id}}">{{$v->lawyer_name}}</option>
+                        @endforeach
+                    </select>
+{{--                    <input type="text" id="L_username" name="lawyer" required="" lay-verify="nikename"--}}
+{{--                           autocomplete="off" class="layui-input">--}}
                 </div>
                 <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入律师姓名
+                    <span class="x-red">*</span>选择律师
                 </div>
           </div>
           <div class="layui-form-item">
