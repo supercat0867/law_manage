@@ -74,7 +74,7 @@
             <td>{{$v->customer_name}}</td>
             <td>{{$v->customer_phone}}</td>
             @php
-            $lawyer=\App\Model\Lawyer::where('lawyer_id',$v->lawyer_id)->first()->lawyer_name
+            $lawyer=\App\Model\Lawyer::where('lawyer_id',$v->lawyer_id)->first()->lawyer_name;
             @endphp
             <td>{{$lawyer}}</td>
             <td>{{$v->created_at}}</td>
