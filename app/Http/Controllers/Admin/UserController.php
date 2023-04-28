@@ -11,7 +11,7 @@ use phpDocumentor\Reflection\Types\Void_;
 
 class UserController extends Controller
 {
-    //返回个案客户列表
+    //返回客户列表
     public function index(Request $request)
     {
         $customer=Customer::orderBy('customer_id','asc')

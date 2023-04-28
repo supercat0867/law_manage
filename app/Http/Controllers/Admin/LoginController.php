@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Model\Admin;
 
+use App\Model\Article;
+use App\Model\CaseInfo;
+use App\Model\Customer;
+use App\Model\Lawyer;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -80,7 +84,11 @@ class LoginController extends Controller
     //返回后台欢迎界面
     public function welcome(){
         $adminInfo=session()->get('adminInfo');
-        return view("admin.welcome",compact("adminInfo"));
+        $user=Customer::get()->count();
+        $case=CaseInfo::get()->count();
+        $article=Article::get()->count();
+        $lawyer=Lawyer::get()->count();
+        return view("admin.welcome",compact("adminInfo","user","case","article","lawyer"));
     }
     //退出登录
     public function logout(){

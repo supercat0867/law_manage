@@ -22,6 +22,14 @@ class LawyerController extends Controller
         $lawyer=Lawyer::where('lawyer_phone',$phone)->first();
         return view('lawyer.index',compact('lawyer'));
     }
+    //退出登录
+    public function logout()
+    {
+        //清空session中的用户信息
+        session()->flush();
+        //跳转到登陆页面
+        return redirect('/login');
+    }
     //案件信息上传表单
     public function caseform()
     {

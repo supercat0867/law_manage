@@ -59,6 +59,8 @@ Route::group(['prefix'=>'lvguan','namespace'=>'isLogin','middleware'=>'IsLogin']
 
 //律师专栏
 Route::group(['prefix'=>'lvguan','namespace'=>'isLogin','middleware'=>['IsLogin','IsLawyer']],function () {
+    //律师退出登录
+    Route::get('lawyer/logout','LawyerController@logout');
     //律师专栏
     Route::get('lawyer','LawyerController@index');
     //案件信息上传表单
@@ -216,4 +218,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
     //更换封面
     Route::put('article/upload/{id}','ArticleController@change');
 
+    //案件管理模块
+    Route::resource('case','CaseController');
 });
