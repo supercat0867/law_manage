@@ -80,21 +80,6 @@
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
-                    <cite>常法合同管理</cite>
-                    <i class="iconfont nav_right">&#xe697;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>合同列表</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
                     <cite>文章管理</cite>
                     <i class="iconfont nav_right">&#xe697;</i>
                 </a>

@@ -40,10 +40,20 @@ Route::group(['prefix'=>'lvguan','namespace'=>'isLogin','middleware'=>'IsLogin']
     Route::get('case/preview','CaseController@preview');
     //常法服务中心
     Route::get('daily','DailyController@index');
+    //工作记录页面
+    Route::get('daily/work','DailyController@work');
     //会务记录
     Route::get('daily/meeting','DailyController@meeting');
+    //法律意见书
+    Route::get('daily/advice','DailyController@advice');
+    //其他工作事务
+    Route::get('daily/other','DailyController@other');
     //会议内容
     Route::get('daily/{id}/meeting','DailyController@meetcontent');
+    //法律意见书内容
+    Route::get('daily/{id}/advice','DailyController@advicecontent');
+    //其他工作事务内容
+    Route::get('daily/{id}/other','DailyController@othercontent');
     //微信沟通群
     Route::get('daily/wxgroup','DailyController@wxgroup');
     //微信沟通群
@@ -220,4 +230,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['hasRole','A
 
     //案件管理模块
     Route::resource('case','CaseController');
+    //案件批量删除
+    Route::post('case/del','CaseController@delAll');
 });

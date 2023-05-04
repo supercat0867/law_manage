@@ -23,34 +23,15 @@
     </div>
     <!-- * loader -->
 
-    <!-- App Header -->
+    <!-- 头部 -->
     <div class="appHeader bg-primary scrolled">
         <div class="left">
             <a href="#" class="headerButton" data-toggle="modal" data-target="#sidebarPanel">
                 <ion-icon name="menu-outline"></ion-icon>
             </a>
         </div>
-        <div class="pageTitle">
-
-        </div>
     </div>
-    <!-- * App Header -->
-
-    <!-- Search Component -->
-    <div id="search" class="appHeader">
-        <form class="search-form">
-            <div class="form-group searchbox">
-                <input type="text" class="form-control" placeholder="Search...">
-                <i class="input-icon">
-                    <ion-icon name="search-outline"></ion-icon>
-                </i>
-                <a href="javascript:;" class="ml-1 close toggle-searchbox">
-                    <ion-icon name="close-circle"></ion-icon>
-                </a>
-            </div>
-        </form>
-    </div>
-    <!-- * Search Component -->
+    <!-- * 头部 -->
 
     <!-- App Capsule -->
     <div id="appCapsule">
@@ -106,7 +87,7 @@
                         <ion-icon name="refresh-outline"></ion-icon>
                     </div>
                     <div class="in">
-                        会务记录上传
+                        工作记录上传
                     </div>
                 </a>
             </li>
@@ -132,16 +113,9 @@
             </li>
         </ul>
 
-
-        <!-- app footer -->
-        <div class="appFooter">
-<!--            <img src="assets/img/logo.png" alt="icon" class="footer-logo mb-2">-->
-            <div class="footer-title">
-                Copyright © 2023 四川律冠法律咨询有限公司 All rights reserved.
-            </div>
-        </div>
-        <!-- * app footer -->
-
+        <!-- 底部 -->
+        @include('lawyer.public.footer')
+        <!-- * 底部 -->
     </div>
     <!-- * App Capsule -->
 
@@ -177,158 +151,9 @@
 <!--    </div>-->
     <!-- * App Bottom Menu -->
 
-    <!-- App Sidebar -->
-    <div class="modal fade panelbox panelbox-left" id="sidebarPanel" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body p-0">
-
-                    <!-- profile box -->
-                    <div class="profileBox">
-                        <div class="image-wrapper">
-                            <img src="{{asset("$lawyer->perimgpath")}}" alt="image" class="imaged rounded">
-                        </div>
-                        <div class="in">
-                            <strong>{{$lawyer->lawyer_name}}</strong>
-                            <div class="text-muted">
-                                <ion-icon name="location"></ion-icon>
-                                四川成都
-                            </div>
-                        </div>
-                        <a href="javascript:;" class="close-sidebar-button" data-dismiss="modal">
-                            <ion-icon name="close"></ion-icon>
-                        </a>
-                    </div>
-                    <!-- * profile box -->
-
-                    <ul class="listview flush transparent no-line image-listview mt-2">
-<!--                        <li>-->
-<!--                            <a href="index.html" class="item">-->
-<!--                                <div class="icon-box bg-primary">-->
-<!--                                    <ion-icon name="home-outline"></ion-icon>-->
-<!--                                </div>-->
-<!--                                <div class="in">-->
-<!--                                    Discover-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <a href="app-components.html" class="item">-->
-<!--                                <div class="icon-box bg-primary">-->
-<!--                                    <ion-icon name="cube-outline"></ion-icon>-->
-<!--                                </div>-->
-<!--                                <div class="in">-->
-<!--                                    Components-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-                        <li>
-                            <a href="/lvguan/lawyer" class="item">
-                                <div class="icon-box bg-primary">
-                                    <ion-icon name="layers-outline"></ion-icon>
-                                </div>
-                                <div class="in">
-                                    <div>律师专栏</div>
-                                </div>
-                            </a>
-                        </li>
-<!--                        <li>-->
-<!--                            <a href="page-chat.html" class="item">-->
-<!--                                <div class="icon-box bg-primary">-->
-<!--                                    <ion-icon name="chatbubble-ellipses-outline"></ion-icon>-->
-<!--                                </div>-->
-<!--                                <div class="in">-->
-<!--                                    <div>Chat</div>-->
-<!--                                    <span class="badge badge-danger">5</span>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-                        <li>
-                            <div class="item">
-                                <div class="icon-box bg-primary">
-                                    <ion-icon name="moon-outline"></ion-icon>
-                                </div>
-                                <div class="in">
-                                    <div>夜间模式</div>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input dark-mode-switch"
-                                            id="darkmodesidebar">
-                                        <label class="custom-control-label" for="darkmodesidebar"></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-{{--                    <div class="listview-title mt-2 mb-1">--}}
-{{--                        <span>Friends</span>--}}
-{{--                    </div>--}}
-{{--                    <ul class="listview image-listview flush transparent no-line">--}}
-{{--                        <li>--}}
-{{--                            <a href="page-chat.html" class="item">--}}
-{{--                                <img src="assets/img/sample/avatar/avatar7.jpg" alt="image" class="image">--}}
-{{--                                <div class="in">--}}
-{{--                                    <div>Sophie Asveld</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="page-chat.html" class="item">--}}
-{{--                                <img src="assets/img/sample/avatar/avatar3.jpg" alt="image" class="image">--}}
-{{--                                <div class="in">--}}
-{{--                                    <div>Sebastian Bennett</div>--}}
-{{--                                    <span class="badge badge-danger">6</span>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="page-chat.html" class="item">--}}
-{{--                                <img src="assets/img/sample/avatar/avatar10.jpg" alt="image" class="image">--}}
-{{--                                <div class="in">--}}
-{{--                                    <div>Beth Murphy</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="page-chat.html" class="item">--}}
-{{--                                <img src="assets/img/sample/avatar/avatar2.jpg" alt="image" class="image">--}}
-{{--                                <div class="in">--}}
-{{--                                    <div>Amelia Cabal</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="page-chat.html" class="item">--}}
-{{--                                <img src="assets/img/sample/avatar/avatar5.jpg" alt="image" class="image">--}}
-{{--                                <div class="in">--}}
-{{--                                    <div>Henry Doe</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-
-                </div>
-
-                <!-- sidebar buttons -->
-                <div class="sidebar-buttons">
-{{--                    <a href="javascript:;" class="button">--}}
-{{--                        <ion-icon name="person-outline"></ion-icon>--}}
-{{--                    </a>--}}
-{{--                    <a href="javascript:;" class="button">--}}
-{{--                        <ion-icon name="archive-outline"></ion-icon>--}}
-{{--                    </a>--}}
-{{--                    <a href="javascript:;" class="button">--}}
-{{--                        <ion-icon name="settings-outline"></ion-icon>--}}
-{{--                    </a>--}}
-                    <a href="/lvguan/lawyer/logout" class="button">
-                        <ion-icon name="log-out-outline"></ion-icon>
-                    </a>
-                </div>
-                <!-- * sidebar buttons -->
-            </div>
-        </div>
-    </div>
-    <!-- * App Sidebar -->
+    <!-- 侧边栏 -->
+    @include('lawyer.public.aside',['img'=>$lawyer->perimgpath,'name'=>$lawyer->lawyer_name])
+    <!-- * 侧边栏 -->
 
     <!-- ///////////// Js Files ////////////////////  -->
     <!-- Jquery -->

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\CaseInfo;
+use App\Model\CaseProgress;
+use App\Model\Customer;
+use App\Model\Lawyer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -27,70 +30,90 @@ class CaseController extends Controller{
         $count=$case->count();
         return view('admin.case.list',compact('case','request','count'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //添加案件列表
     public function create()
     {
-        //
+        $lawyer=Lawyer::get();
+        return view('admin.case.add',compact('lawyer'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //案件添加接口
     public function store(Request $request)
     {
-        //
+        $input=$request->all();
+        $caseid=date('YmdHis',time());
+        $res=Customer::where('customer_phone',$input['phone'])->first();
+        if (!$res){
+            Customer::create(['customer_name'=>$input['name'],'customer_phone'=>$input['phone'],'lawyer_id'=>$input['lawyer'],'type'=>1]);
+        }
+        $lawyer_id=Lawyer::where('lawyer_id',$input['lawyer'])->first()->lawyer_phone;
+        $res1=CaseInfo::create(['caseid'=>$caseid,'title'=>$input['title'],'party_phone'=>$input['phone'],'lawyer_phone'=>$lawyer_id]);
+        $res2=CaseProgress::create(['caseid'=>$caseid]);
+        if ($res1&&$res2){
+            $data=[
+                'status'=>1,
+                'message'=>"案件添加成功"
+            ];
+        }
+        else{
+            $data=[
+                'status'=>2,
+                'message'=>"案件添加失败"
+            ];
+        }
+        return $data;
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //返回编辑表单
     public function edit($id)
     {
-        //
+        $case=CaseInfo::where('caseid',$id)->first();
+        $lawyer=Lawyer::where('lawyer_phone',$case->lawyer_phone)->first()->lawyer_name;
+        $lawyers=Lawyer::get();
+        return view('admin.case.edit',compact('case','lawyers','lawyer'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //删除案件
     public function destroy($id)
     {
-        //
+        $case=CaseInfo::where('caseid',$id);
+        $progress=CaseProgress::where('caseid',$id);
+        $res1=$case->delete();
+        $res2=$progress->delete();
+        if($res1&&$res2){
+            $data=[
+                'status'=>0,
+                'message'=>'删除成功',
+            ];
+        }
+        else{
+            $data=[
+                'status'=>1,
+                'message'=>'删除失败',
+            ];
+        }
+        return $data;
+    }
+    //批量删除案件
+    public function delAll(Request $request){
+        $ids = explode(',', $request->get('id'));
+        $res1=CaseInfo::whereIn('caseid',$ids)->delete();
+        $res2=CaseProgress::whereIn('caseid',$ids)->delete();
+        if($res1&&$res2){
+            $data=[
+                'status'=>0,
+                'message'=>'删除成功',
+            ];
+        }
+        else{
+            $data=[
+                'status'=>1,
+                'message'=>'删除失败',
+            ];
+        }
+        return $data;
     }
 }

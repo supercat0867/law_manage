@@ -198,7 +198,7 @@
     <div class="content">
         <p class="name">会务记录</p>
         <form class="fom" action="" method="get">
-            <input class="inp1" type="date" name="time" value="{{$time}}">
+            <input class="inp1" type="text" name="key" placeholder="关键词" value="{{$key}}">
             <button type="submit" class="button" >搜索</button>
         </form>
         <ul class="list">

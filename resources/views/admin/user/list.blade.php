@@ -59,6 +59,7 @@
             <th>客户名</th>
             <th>手机号</th>
             <th>负责人</th>
+            <th>类型</th>
             <th>注册日期</th>
             <th>更新日期</th>
             <th>状态</th>
@@ -75,8 +76,15 @@
             <td>{{$v->customer_phone}}</td>
             @php
             $lawyer=\App\Model\Lawyer::where('lawyer_id',$v->lawyer_id)->first()->lawyer_name;
+            if ($v->type==1){
+                $type='个案客户';
+            }
+            else{
+                $type='常法单位';
+            }
             @endphp
             <td>{{$lawyer}}</td>
+            <td>{{$type}}</td>
             <td>{{$v->created_at}}</td>
             <td>{{$v->updated_at}}</td>
             @php

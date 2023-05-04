@@ -22,14 +22,25 @@
         <form class="layui-form">
             <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">
-                    <span class="x-red">*</span>客户名
+                    <span class="x-red">*</span>案件标题
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                    <input type="text" id="L_username" name="title" required="" lay-verify="title"
                            autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>输入客户的真实姓名
+                    <span class="x-red">*</span>输入案件标题
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_phone" class="layui-form-label">
+                    <span class="x-red">*</span>客户名
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_phone" name="name" required="" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>客户真实姓名
                 </div>
             </div>
           <div class="layui-form-item">
@@ -37,8 +48,7 @@
                   <span class="x-red">*</span>手机号
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_phone" name="phone" required="" lay-verify="phone"
-                  autocomplete="off" class="layui-input">
+                  <input type="text" id="L_phone" name="phone" required="" autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>将会成为客户的登入手机号
@@ -54,8 +64,6 @@
                             <option value="{{$v->lawyer_id}}">{{$v->lawyer_name}}</option>
                         @endforeach
                     </select>
-{{--                    <input type="text" id="L_username" name="lawyer" required="" lay-verify="nikename"--}}
-{{--                           autocomplete="off" class="layui-input">--}}
                 </div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>选择律师
@@ -75,22 +83,20 @@
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
-        
           //自定义验证规则
           form.verify({
-            nikename: function(value){
-              if(value.length < 2){
-                return '姓名至少2个字!';
+            title: function(value){
+              if(value.length < 5){
+                return '标题至少5个字!';
               }
             }
           });
-
           //监听提交
           form.on('submit(add)', function(data){
             //发异步，把数据提交给php
               $.ajax({
                   type:'POST',
-                  url:'/admin/user',
+                  url:'/admin/case',
                   dataType:'json',
                   headers: {
                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -98,7 +104,7 @@
                   data:data.field,
                   success:function (data){
                       // 弹层提示添加成功，并刷新父页面
-                      if(data.status==2){
+                      if(data.status==1){
                           layer.alert(data.message,{icon:6},function (){
                               parent.location.reload(true);
                           })
@@ -115,12 +121,6 @@
           });
         });
     </script>
-    <script>var _hmt = _hmt || []; (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();</script>
   </body>
 
 </html>

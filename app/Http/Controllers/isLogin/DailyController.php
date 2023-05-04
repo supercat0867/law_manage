@@ -15,34 +15,105 @@ class DailyController extends Controller
     {
         return view('center.daily');
     }
-    //返回会务记录界面
-    public function meeting(Request $request)
+    //工作记录页面
+    public function work()
     {
-        $time=$request->input('time');
+        return view('center.work');
+    }
+    //返回法律意见书界面
+    public function advice(Request $request)
+    {
+        $key=$request->input('key');
         $power=session()->get('~__~');
         $phone=session()->get('phone');
         if ($power=='0526'){
             $id=Customer::where('customer_phone',$phone)->first()->customer_id;
-            if ($time){
-                $meeting=Meeting::where('party_id',$id)->where('time',$time)->get();
+            if ($key){
+                $advice=Meeting::where('type',2)->where('party_id',$id)->where('title','like','%'.$key.'%')->get();
             }
             else{
-                $meeting=Meeting::where('party_id',$id)->get();
+                $advice=Meeting::where('type',2)->where('party_id',$id)->get();
             }
         }
         elseif($power=='0710'){
             $id=Lawyer::where('lawyer_phone',$phone)->first()->lawyer_id;
-            if ($time){
-                $meeting=Meeting::where('lawyer_id',$id)->where('time',$time)->get();
+            if ($key){
+                $advice=Meeting::where('type',2)->where('lawyer_id',$id)->where('title','like','%'.$key.'%')->get();
             }
             else{
-                $meeting=Meeting::where('lawyer_id',$id)->get();
+                $advice=Meeting::where('type',2)->where('lawyer_id',$id)->get();
             }
         }
         else{
-            $meeting=[];
+            $advice=[];
         }
-        return view('center.dailyMeeting',compact('meeting','time'));
+        return view('center.dailyAdvice',compact('advice','key'));
+    }
+    //法律意见书内容
+    public function advicecontent($id)
+    {
+        $advice=Meeting::find($id);
+        return view('center.advice',compact('advice'));
+    }
+    //其他工作事务界面
+    public function other(Request $request)
+    {
+        $key=$request->input('key');
+        $power=session()->get('~__~');
+        $phone=session()->get('phone');
+        if ($power=='0526'){
+            $id=Customer::where('customer_phone',$phone)->first()->customer_id;
+            if ($key){
+                $other=Meeting::where('type',3)->where('party_id',$id)->where('title','like','%'.$key.'%')->get();
+            }
+            else{
+                $other=Meeting::where('type',3)->where('party_id',$id)->get();
+            }
+        }
+        elseif($power=='0710'){
+            $id=Lawyer::where('lawyer_phone',$phone)->first()->lawyer_id;
+            if ($key){
+                $other=Meeting::where('type',3)->where('lawyer_id',$id)->where('title','like','%'.$key.'%')->get();
+            }
+            else{
+                $other=Meeting::where('type',3)->where('lawyer_id',$id)->get();
+            }
+        }
+        else{
+            $other=[];
+        }
+        return view('center.dailyOther',compact('other','key'));
+    }
+    //其他工作事务内容
+    public function othercontent($id)
+    {
+        $other=Meeting::find($id);
+        return view('center.other',compact('other'));
+    }
+    //返回会务记录界面
+    public function meeting(Request $request)
+    {
+        $key = $request->input('key');
+        $power = session()->get('~__~');
+        $phone = session()->get('phone');
+        if ($power == '0526') {
+            $id = Customer::where('customer_phone', $phone)->first()->customer_id;
+            if ($key) {
+                $meeting = Meeting::where('type', 1)->where('party_id', $id)->where('title', 'like', '%' . $key . '%')->get();
+            } else {
+                $meeting = Meeting::where('type', 1)->where('party_id', $id)->get();
+            }
+        } elseif ($power == '0710') {
+            $id = Lawyer::where('lawyer_phone', $phone)->first()->lawyer_id;
+            if ($key) {
+                $meeting = Meeting::where('type', 1)->where('lawyer_id', $id)->where('title', 'like', '%' . $key . '%')->get();
+            } else {
+                $meeting = Meeting::where('type', 1)->where('lawyer_id', $id)->get();
+            }
+        } else {
+            $meeting = [];
+        }
+        return view('center.dailyMeeting', compact('meeting', 'key'));
     }
     //会务内容
     public function meetcontent($id)
@@ -184,7 +255,6 @@ class DailyController extends Controller
                 }
                 return response()->json(['ServerNo'=>'500','ResultData'=>$re]);
             }
-
         }
     }
 }

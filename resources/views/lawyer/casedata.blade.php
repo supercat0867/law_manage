@@ -90,12 +90,7 @@
         </ul>
 
         <!-- app footer -->
-        <div class="appFooter">
-<!--            <img src="assets/img/logo.png" alt="icon" class="footer-logo mb-2">-->
-            <div class="footer-title">
-                Copyright © 2023 四川律冠法律咨询有限公司 All rights reserved.
-            </div>
-        </div>
+        @include('lawyer.public.footer')
         <!-- * app footer -->
 
     </div>

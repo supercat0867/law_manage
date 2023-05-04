@@ -23,23 +23,45 @@
     <form class="layui-form">
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
-                <span class="x-red">*</span>用户名
+                <span class="x-red">*</span>案件标题
             </label>
             <div class="layui-input-inline">
-                <input type="hidden" name="uid" value="{{$customer->customer_id}}">
-                <input type="text" id="L_username" name="username" value="{{$customer->customer_name}}" required="" lay-verify="nikename"
-                       autocomplete="off" class="layui-input">
+                <input type="hidden" name='caseid' value="{{$case->caseid}}">
+                <input type="text" id="L_username" name="title" required="" lay-verify="title"
+                       autocomplete="off" class="layui-input" value="{{$case->title}}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>输入案件标题
             </div>
         </div>
         <div class="layui-form-item">
             <label for="L_phone" class="layui-form-label">
-                <span class="x-red">*</span>手机号
+                <span class="x-red">*</span>客户手机号
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="L_phone" name="phone" value="{{$customer->customer_phone}}" required="" lay-verify="phone" autocomplete="off" class="layui-input">
+                <input type="text" id="L_phone" name="phone" required="" autocomplete="off" class="layui-input" value="{{$case->party_phone}}">
             </div>
             <div class="layui-form-mid layui-word-aux">
                 <span class="x-red">*</span>将会成为客户的登入手机号
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+                <span class="x-red">*</span>律师
+            </label>
+            <div class="layui-input-inline">
+                <select name="lawyer" id="" autocomplete="off" class="layui-input">
+                    @foreach($lawyers as $v)
+                        @if($v->lawyer_name==$lawyer)
+                            <option value="{{$v->lawyer_id}}" selected>{{$v->lawyer_name}}</option>
+                        @else
+                            <option value="{{$v->lawyer_id}}">{{$v->lawyer_name}}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>选择律师
             </div>
         </div>
         <div class="layui-form-item">
@@ -56,23 +78,21 @@
         $ = layui.jquery;
         var form = layui.form
             ,layer = layui.layer;
-
         //自定义验证规则
         form.verify({
-            nikename: function(value){
-                if(value.length < 2){
-                    return '姓名至少2个字!';
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少5个字!';
                 }
             }
         });
-
         //监听提交
         form.on('submit(edit)', function(data){
-            var uid=$("input[name='uid']").val();
+            var caseid=$("input[name='caseid']").val();
             //发异步，把数据提交给php
             $.ajax({
                 type:'PUT',
-                url:'/admin/user/'+uid,
+                url:'/admin/case/'+caseid,
                 dataType:'json',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -93,21 +113,11 @@
                 error:function (){
                     //错误信息
                 }
-
             })
-
             return false;
         });
-
-
     });
 </script>
-<script>var _hmt = _hmt || []; (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();</script>
 </body>
 
 </html>

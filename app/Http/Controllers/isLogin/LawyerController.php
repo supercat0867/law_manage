@@ -46,7 +46,7 @@ class LawyerController extends Controller
         $res=Customer::where('customer_phone',$cusPhone)->first();
         $lawyerid=Lawyer::where('lawyer_phone',$lawyerphone)->first()->lawyer_id;
         if (!$res){
-            Customer::create(['customer_name'=>$name,'customer_phone'=>$cusPhone,'lawyer_id'=>$lawyerid]);
+            Customer::create(['customer_name'=>$name,'customer_phone'=>$cusPhone,'lawyer_id'=>$lawyerid,'type'=>1]);
         }
         $case=CaseInfo::create(['title'=>$title,'party_phone'=>$cusPhone,'caseid'=>$caseid,'lawyer_phone'=>$lawyerphone]);
         $progress=CaseProgress::create(['caseid'=>$caseid]);
@@ -76,7 +76,7 @@ class LawyerController extends Controller
         $cusPhone=$request->input('userphone');
         $lawyerphone=session()->get('phone');
         $lawyerid=Lawyer::where('lawyer_phone',$lawyerphone)->first()->lawyer_id;
-        $customer=Customer::create(['customer_name'=>$name,'customer_phone'=>$cusPhone,'lawyer_id'=>$lawyerid]);
+        $customer=Customer::create(['customer_name'=>$name,'customer_phone'=>$cusPhone,'lawyer_id'=>$lawyerid,'type'=>2]);
         if ($customer){
             $data=[
                 'status'=>1,
@@ -232,33 +232,34 @@ class LawyerController extends Controller
 
         }
     }
-    //会务记录上传表单
+    //工作记录表单
     public function meetform()
     {
-        $customer=customer::get();
+        $customer=customer::where('type',2)->get();
         return view('lawyer.meeting',compact('customer'));
     }
-    //会议记录上传接口
+    //工作记录上传接口
     public function meeting(Request $request)
     {
         $title=$request->input('title');
+        $type=$request->input('type');
         $member=$request->input('member');
         $date=$request->input('date');
         $customer_id=$request->input('customer_id');
         $content=$request->input('content');
         $lawyerphone=session()->get('phone');
         $lawyerid=Lawyer::where('lawyer_phone',$lawyerphone)->first()->lawyer_id;
-        $res=Meeting::create(['title'=>$title,'content'=>$content,'party_id'=>$customer_id,'lawyer_id'=>$lawyerid,'member'=>$member,'time'=>$date]);
+        $res=Meeting::create(['title'=>$title,'content'=>$content,'party_id'=>$customer_id,'lawyer_id'=>$lawyerid,'member'=>$member,'time'=>$date,'type'=>$type]);
         if ($res){
             $data=[
                 'status'=>1,
-                'message'=>"会务记录上传成功"
+                'message'=>"工作记录上传成功"
             ];
         }
         else{
             $data=[
                 'status'=>2,
-                'message'=>"会务记录上传失败"
+                'message'=>"工作记录上传失败"
             ];
         }
         return $data;
@@ -285,7 +286,7 @@ class LawyerController extends Controller
             $ext=$file->getClientOriginalExtension();
             $imgs=array('jpg','png','jpeg');
             if (!in_array($ext,$imgs)){
-                return response()->json(['ServerNo'=>'300','ResultData'=>"文件格式只能为jpg,png"]);
+                return response()->json(['ServerNo'=>'300','ResultData'=>"文件格式只能为jpg,png,jpeg"]);
             }
             //新文件名
             $newfile=time().rand(1000,9000).'.'.$ext;

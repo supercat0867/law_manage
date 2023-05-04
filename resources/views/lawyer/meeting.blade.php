@@ -39,14 +39,26 @@
     <div class="aui-content-up">
         <form name="form1">
             <div class="aui-content-up-form">
-                <h2>会务记录上传</h2>
+                <h2>工作记录上传</h2>
             </div>
             <div class="aui-form-group clear">
                 <label class="aui-label-control">
-                    会议名称 <em>*</em>
+                    标题 <em>*</em>
                 </label>
                 <div class="aui-form-input">
                     <input type="text" class="aui-form-control-two" name="title" id="title" placeholder="请输入会议名称"  required />
+                </div>
+            </div>
+            <div class="aui-form-group clear">
+                <label class="aui-label-control">
+                    类型 <em>*</em>
+                </label>
+                <div class="aui-form-input">
+                    <select class="aui-form-control-two" name="type" id="type">
+                        <option value="1">会务记录</option>
+                        <option value="2">法律意见书</option>
+                        <option value="3">其他工作事务</option>
+                    </select>
                 </div>
             </div>
             <div class="aui-form-group clear">
@@ -63,15 +75,15 @@
             </div>
             <div class="aui-form-group clear">
                 <label class="aui-label-control">
-                    参会人员 <em>*</em>
+                    参会人员
                 </label>
                 <div class="aui-form-input">
-                    <input type="text" class="aui-form-control-two" name="member" id="member" placeholder="请输入参会人员"  required />
+                    <input type="text" class="aui-form-control-two" name="member" id="member" placeholder="会务记录请输入参会人员"  required />
                 </div>
             </div>
             <div class="aui-form-group clear">
                 <label class="aui-label-control">
-                    会议时间 <em>*</em>
+                    时间 <em>*</em>
                 </label>
                 <div class="aui-form-input">
                     <input type="date" class="aui-form-control-two" name="date" id="date" required />
@@ -79,7 +91,7 @@
             </div>
             <div class="aui-form-group clear">
                 <label class="aui-label-control">
-                    会议内容 <em>*</em>
+                    内容 <em>*</em>
                 </label>
                 <div class="aui-form-input">
                     <textarea class="aui-form-control" name="description" id="content" minlength="0" required></textarea>
@@ -98,13 +110,13 @@
 <script src="{{asset('center/js/jquery.min.js')}}"></script>
 
 <script type="text/javascript">
-
     function submitdata(){
         var title=$("#title").val();
         var member=$("#member").val();
         var date=$("#date").val();
         var customer_id=$("#customer").val();
         var content=$("#content").val();
+        var type=$("#type").val();
         $.ajax({
                 url:"/lvguan/lawyer/post/meeting",
                 headers: {
@@ -117,6 +129,7 @@
                     date:date,
                     customer_id:customer_id,
                     content:content,
+                    type:type,
                 },
                 dataType:'json',
                 success:function (data){

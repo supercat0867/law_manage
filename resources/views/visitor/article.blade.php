@@ -48,8 +48,8 @@
     <div class="container">
         <div class="about-us-foot">
             <h6>负责人：邵建炜</h6>
-            <p> 联系电话：13558789376</p>
-            <p>微信号：s13092801616 邮箱：2446701708@qq.com</p>
+            <p>联系电话：13558789376</p>
+            <p>微信号：s13092801616</p>
         </div>
     </div>
 </div></body></html>

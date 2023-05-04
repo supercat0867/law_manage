@@ -39,7 +39,7 @@
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加客户','{{url("admin/user/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加客户','{{url("admin/case/create")}}',600,400)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：{{$count}} 条</span>
       </xblock>
       <table class="layui-table">
@@ -80,7 +80,7 @@
               }
               else{
                   $status="已结案";
-                  $operate='办理中';
+                  $operate='办理';
                   $class='layui-btn layui-btn-normal layui-btn-mini layui-btn-disabled';
                   $icon="&#xe62f;";
               }
@@ -91,7 +91,7 @@
               <a onclick="member_stop(this,{{$v->caseid}})" href="javascript:;"  title="{{$operate}}">
                 <i class="layui-icon">{{$icon}}</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/user/'.$v->caseid.'/edit')}}',600,400)" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('编辑','{{url('admin/case/'.$v->caseid.'/edit')}}',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a title="删除" onclick="member_del(this,{{$v->caseid}})" href="javascript:;">
@@ -127,7 +127,7 @@
           var operate=$(obj).attr('title');
           layer.confirm('确认要'+operate+'吗？',function(index){
 
-              if(operate=='停用'){
+              if(operate=='结案'){
 
                 $.ajax({
                   type:'POST',
@@ -139,9 +139,9 @@
                   },
                   success:function (data){
                     if(data.status==0){
-                      $(obj).attr('title','启用')
+                      $(obj).attr('title','办理')
                       $(obj).find('i').html('&#xe62f;');
-                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                      $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已结案');
                       layer.msg(data.message,{icon: 5,time:1000});
                     }
                     else {
@@ -161,9 +161,9 @@
                   },
                   success:function (data){
                     if(data.status==0){
-                      $(obj).attr('title','停用')
+                      $(obj).attr('title','结案')
                       $(obj).find('i').html('&#xe601;');
-                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                      $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('办理中');
                       layer.msg(data.message,{icon: 6,time:1000});
                     }
                     else {
@@ -179,7 +179,7 @@
       /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
-            $.post('/admin/user/'+id,{"_method":"delete","_token":"{{csrf_token()}}"},function (data){
+            $.post('/admin/case/'+id,{"_method":"delete","_token":"{{csrf_token()}}"},function (data){
               // console.log(data);
               if(data.status==0){
                 $(obj).parents("tr").remove();
@@ -204,7 +204,7 @@
         layer.confirm('确认要删除吗？',function(index){
             $.ajax({
               type:'POST',
-              url:'/admin/user/del',
+              url:'/admin/case/del',
               dataType:'json',
               data:{
                 _token: "{{csrf_token()}}",
@@ -223,12 +223,6 @@
         });
       }
     </script>
-    <script>var _hmt = _hmt || []; (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();</script>
   </body>
 
 </html>
