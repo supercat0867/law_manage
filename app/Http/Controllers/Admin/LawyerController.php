@@ -21,7 +21,7 @@ class LawyerController extends Controller
                     $query->where('lawyer_name','like','%'.$lawyername.'%');
                 }
             })
-            ->paginate($request->input('paging')?$request->input('paging'):5);//默认5页
+            ->paginate($request->input('paging')?$request->input('paging'):10);//默认5页
         $count=$lawyer->count();
         return view('admin.lawyer.list',compact('lawyer','request','count'));
     }
@@ -280,7 +280,22 @@ class LawyerController extends Controller
 //            if(!$file->move($path,$newfile)){
 //                return response()->json(['ServerNo'=>'500','ResultData'=>'保存文件失败']);
 //            }
-            $res=Image::make($file)->save($path.'/'.$newfile);
+            $exif=exif_read_data($file);
+            $img=Image::make($file);
+            if(!empty($exif['Orientation'])) {
+                switch($exif['Orientation']) {
+                    case 8:
+                        $img->rotate(90);
+                        break;
+                    case 3:
+                        $img->rotate(180);
+                        break;
+                    case 6:
+                        $img->rotate(-90);
+                        break;
+                }
+            }
+            $res=$img->save($path.'/'.$newfile);
             if ($res){
                 return response()->json(['ServerNo'=>'200','ResultData'=>$newfile]);
             }

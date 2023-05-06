@@ -50,7 +50,7 @@
                 var obj=this;
                 var formData=new FormData($('#art_form')[0]);
                 $.ajax({
-                    url:'/admin/lawyer/upload',
+                    url:'/admin/admins/upload',
                     headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },

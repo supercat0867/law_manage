@@ -46,7 +46,7 @@ class CaseController extends Controller{
             Customer::create(['customer_name'=>$input['name'],'customer_phone'=>$input['phone'],'lawyer_id'=>$input['lawyer'],'type'=>1]);
         }
         $lawyer_id=Lawyer::where('lawyer_id',$input['lawyer'])->first()->lawyer_phone;
-        $res1=CaseInfo::create(['caseid'=>$caseid,'title'=>$input['title'],'party_phone'=>$input['phone'],'lawyer_phone'=>$lawyer_id]);
+        $res1=CaseInfo::create(['caseid'=>$caseid,'title'=>$input['title'],'party_phone'=>$input['phone'],'lawyer_phone'=>$lawyer_id,'type'=>$input['type']]);
         $res2=CaseProgress::create(['caseid'=>$caseid]);
         if ($res1&&$res2){
             $data=[
@@ -71,9 +71,28 @@ class CaseController extends Controller{
         return view('admin.case.edit',compact('case','lawyers','lawyer'));
     }
 
+    //编辑接口
     public function update(Request $request, $id)
     {
-        //
+        $case=CaseInfo::where('caseid',$id);
+        $title=$request->input('title');
+        $type=$request->input('type');
+        $lawyer=$request->input('lawyer');
+        $phone=$request->input('phone');
+        $res=$case->update(['title'=>$title,'type'=>$type,'party_phone'=>$phone,'lawyer_phone'=>$lawyer]);
+        if($res){
+            $data=[
+                'status'=>0,
+                'message'=>'修改成功',
+            ];
+        }
+        else{
+            $data=[
+                'status'=>1,
+                'message'=>'修改失败',
+            ];
+        }
+        return $data;
     }
 
     //删除案件

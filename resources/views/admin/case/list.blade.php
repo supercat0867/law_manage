@@ -50,6 +50,7 @@
             </th>
             <th>案号</th>
             <th>案件名</th>
+            <th>案件类型</th>
             <th>当事人</th>
             <th>律师</th>
             <th>上传时间</th>
@@ -64,6 +65,17 @@
             </td>
             <td>{{$v->caseid}}</td>
             <td>{{$v->title}}</td>
+            <td>
+              @if($v->type==1)
+                刑事类
+              @elseif($v->type==2)
+                民事类
+              @elseif($v->type==3)
+                行政类
+              @elseif($v->type==4)
+                财税类
+              @endif
+            </td>
             @php
               $lawyer=\App\Model\Lawyer::where('lawyer_phone',$v->lawyer_phone)->first()->lawyer_name;
               $customer=\App\Model\Customer::where('customer_phone',$v->party_phone)->first()->customer_name;

@@ -43,12 +43,13 @@ class LawyerController extends Controller
         $cusPhone=$request->input('userphone');
         $name=$request->input('customer');
         $title=$request->input('title');
+        $type=$request->input('type');
         $res=Customer::where('customer_phone',$cusPhone)->first();
         $lawyerid=Lawyer::where('lawyer_phone',$lawyerphone)->first()->lawyer_id;
         if (!$res){
             Customer::create(['customer_name'=>$name,'customer_phone'=>$cusPhone,'lawyer_id'=>$lawyerid,'type'=>1]);
         }
-        $case=CaseInfo::create(['title'=>$title,'party_phone'=>$cusPhone,'caseid'=>$caseid,'lawyer_phone'=>$lawyerphone]);
+        $case=CaseInfo::create(['title'=>$title,'party_phone'=>$cusPhone,'caseid'=>$caseid,'lawyer_phone'=>$lawyerphone,'type'=>$type]);
         $progress=CaseProgress::create(['caseid'=>$caseid]);
         if ($case&&$progress){
             $data=[

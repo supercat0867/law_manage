@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\IsBoss;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -51,6 +52,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'IsBoss'=>\App\Http\Middleware\IsBoss::class,
         'IsLawyer'=>\App\Http\Middleware\IsLawyer::class,
         'IsLogin'=>\App\Http\Middleware\IsLogin::class,
         'AdminIsLogin'=>\App\Http\Middleware\AdminIsLogin::class,

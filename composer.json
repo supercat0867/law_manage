@@ -10,7 +10,9 @@
         "intervention/image": "^2.7",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "mews/captcha": "^3.3"
+        "mews/captcha": "^3.3",
+      "ext-exif": "*",
+      "ext-gd": "*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

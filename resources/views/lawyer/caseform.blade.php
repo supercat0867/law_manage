@@ -65,6 +65,19 @@
                     <textarea class="aui-form-control" name="description" id="title" minlength="0" placeholder="请输入案件标题" required></textarea>
                 </div>
             </div>
+            <div class="aui-form-group clear">
+                <label class="aui-label-control">
+                    案件类型 <em>*</em>
+                </label>
+                <div class="aui-form-input">
+                    <select class="aui-form-control-two" name="type" id="type">
+                        <option value="1">刑事类</option>
+                        <option value="2">民事类</option>
+                        <option value="3">行政类</option>
+                        <option value="4">财税类</option>
+                    </select>
+                </div>
+            </div>
             <br>
             <div class="aui-form-group clear" style="text-align: center">
                 <div class="aui-btn-default">
@@ -83,6 +96,7 @@
         var userphone=$("#userphone").val();
         var customer=$("#username").val();
         var title=$("#title").val();
+        var type=$("#type").val();
         if (userphone.length!=11){
             alert("请输入正确的手机号");
         }
@@ -96,7 +110,8 @@
                 data:{
                     userphone:userphone,
                     customer:customer,
-                    title:title
+                    title:title,
+                    type:type,
                 },
                 dataType:'json',
                 success:function (data){

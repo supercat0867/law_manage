@@ -3,6 +3,9 @@
 //律冠团队首页
 Route::get('/','Visitor\VisitorController@index');
 
+//关于我
+Route::view('/me','me.index');
+
 //免登录访客页面路由组
 Route::group(['prefix'=>'lvguan','namespace'=>'Visitor'],function (){
     //查询下载中心路由
@@ -103,6 +106,16 @@ Route::group(['prefix'=>'lvguan','namespace'=>'isLogin','middleware'=>['IsLogin'
     Route::post('lawyer/post/ercode','LawyerController@ercode');
     //更换图片
     Route::put('lawyer/put/{id}','LawyerController@change');
+});
+
+//团队客户中心 老板专属
+Route::group(['prefix'=>'lvguan','namespace'=>'isLogin','middleware'=>['IsLogin','IsBoss']],function () {
+    //客户中心
+    Route::get('boss','Boss@index');
+    //个案汇总
+    Route::get('boss/{type}/case','Boss@case');
+    //常法汇总
+    Route::get('boss/daily','Boss@daily');
 });
 
 //后台登录处理路由组

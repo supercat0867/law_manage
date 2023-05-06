@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use App\Model\CaseInfo;
 use App\Model\Customer;
 use App\Model\Lawyer;
 use App\Model\Unit;
@@ -21,7 +22,7 @@ class UserController extends Controller
                     $query->where('customer_name','like','%'.$customername.'%');
                 }
             })
-            ->paginate($request->input('paging')?$request->input('paging'):5);//默认5页
+            ->paginate($request->input('paging')?$request->input('paging'):10);//默认5页
         $count=$customer->count();
         return view('admin.user.list',compact('customer','request','count'));
     }
@@ -176,7 +177,7 @@ class UserController extends Controller
                     $query->where('name','like','%'.$unitname.'%');
                 }
             })
-            ->paginate($request->input('paging')?$request->input('paging'):5);//默认5页
+            ->paginate($request->input('paging')?$request->input('paging'):10);//默认5页
         $count=$unit->count();
         return view('admin.unit.list',compact('unit','request','count'));
     }

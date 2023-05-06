@@ -35,6 +35,22 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label for="L_username" class="layui-form-label">
+                <span class="x-red">*</span>案件类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="type" id="" autocomplete="off" class="layui-input">
+                    <option value="1" @if($case->type==1) selected @endif>刑事类</option>
+                    <option value="2" @if($case->type==2) selected @endif>民事类</option>
+                    <option value="3" @if($case->type==3) selected @endif>行政类</option>
+                    <option value="4" @if($case->type==4) selected @endif>财税类</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>选择案件类型
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label for="L_phone" class="layui-form-label">
                 <span class="x-red">*</span>客户手机号
             </label>
@@ -53,9 +69,9 @@
                 <select name="lawyer" id="" autocomplete="off" class="layui-input">
                     @foreach($lawyers as $v)
                         @if($v->lawyer_name==$lawyer)
-                            <option value="{{$v->lawyer_id}}" selected>{{$v->lawyer_name}}</option>
+                            <option value="{{$v->lawyer_phone}}" selected>{{$v->lawyer_name}}</option>
                         @else
-                            <option value="{{$v->lawyer_id}}">{{$v->lawyer_name}}</option>
+                            <option value="{{$v->lawyer_phone}}">{{$v->lawyer_name}}</option>
                         @endif
                     @endforeach
                 </select>

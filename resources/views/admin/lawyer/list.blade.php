@@ -30,8 +30,8 @@
           <div class="layui-input-inline">
             <select name="paging" lay-filter="aihao">
 {{--              <option value=""></option>--}}
-              <option value="5" @if($request->input('paging')==5)  selected @endif>5</option>
               <option value="10" @if($request->input('paging')==10)  selected @endif>10</option>
+              <option value="15" @if($request->input('paging')==15)  selected @endif>15</option>
             </select>
 
           </div>

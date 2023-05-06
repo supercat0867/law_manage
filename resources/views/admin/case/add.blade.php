@@ -33,6 +33,22 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label for="L_username" class="layui-form-label">
+                    <span class="x-red">*</span>案件类型
+                </label>
+                <div class="layui-input-inline">
+                    <select name="type" id="" autocomplete="off" class="layui-input">
+                        <option value="1">刑事类</option>
+                        <option value="2">民事类</option>
+                        <option value="3">行政类</option>
+                        <option value="4">财税类</option>
+                    </select>
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>选择案件类型
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label for="L_phone" class="layui-form-label">
                     <span class="x-red">*</span>客户名
                 </label>

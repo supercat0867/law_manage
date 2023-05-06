@@ -137,7 +137,22 @@ class AdministController extends Controller
             $ext=$file->getClientOriginalExtension();
             $newfile=time().rand(1000,9000).'.'.$ext;
             $path=public_path('uploads');
-            $res=Image::make($file)->save($path.'/'.$newfile);
+            $exif=exif_read_data($file);
+            $img= Image::make($file);
+            if(!empty($exif['Orientation'])) {
+                switch($exif['Orientation']) {
+                    case 8:
+                        $img->rotate(90);
+                        break;
+                    case 3:
+                        $img->rotate(180);
+                        break;
+                    case 6:
+                        $img->rotate(-90);
+                        break;
+                }
+            }
+            $res=$img->save($path.'/'.$newfile);
             if ($res){
                 return response()->json(['ServerNo'=>'200','ResultData'=>$newfile]);
             }

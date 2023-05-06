@@ -118,6 +118,9 @@ class LoginController extends Controller
         if ($phone==$session_phone&&$code==$session_code){
             $time = md5(time());
             $token = substr($time,5,6);
+            if ($phone=='13558789376'||$phone=='18382117550'){
+                session()->put('XD','boss');
+            }
             session()->put('code', '');
             session()->put('token',$token);
             if ($target){
